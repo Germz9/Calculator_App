@@ -1,0 +1,158 @@
+
+
+
+:root{
+    
+    
+  --buttw: auto;  
+    --bordCol:lightblue;
+    --buttBack:linear-gradient(to bottom, lightblue,#FFFFFF,#FFFFFF);
+    --buttColor:#000000;
+    --navBack:linear-gradient(to top, lightblue,#FFFFFF);
+    --solgokzCol:#000000;
+    --buttCBack:linear-gradient(to bottom,#000000,#FFFFFF);
+    
+    
+    --buttCcolor:#FFFFFF;
+    --mainBoxBack:#FFFFFF;
+    --calcBack:#FFFFFF;
+    
+}
+
+
+body{
+    
+    
+    
+    padding-left:2px;
+    padding-right:2px;
+    margin: 0%;
+    background: var(--mainBoxBack);
+}
+nav{
+    
+    position: absolute;
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height:50px;
+    color: var(--solgokzCol);
+    font-weight: bold;
+    background: var(--navBack);
+    border: solid 1px var(--bordCol);
+}
+
+.selectTheme{
+    
+    
+    
+    
+    
+    position: absolute;
+    right: 1px;
+    top: 50px;
+    width: 20%;
+    color: var(--buttColor);
+    background: var(--buttBack);
+    font-weight: bold;
+}
+.mainBox{
+    
+    
+    position: relative;
+    
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    background: var(--mainBoxBack);
+    
+    
+    
+    
+}
+
+
+.buttonBox{
+    
+    
+    position: absolute;
+    display: grid;
+    grid-template-columns:  var(--buttw  ) var(--buttw  ) var(--buttw  ) var(--buttw  ); 
+    grid-gap: 5px;
+    
+    width: 100%;
+    
+    height: 50%;
+   // border: solid black 1px;
+    
+    bottom: 0%;
+    left: 0%;
+    
+    
+    
+    
+    
+}
+
+.butt{
+    
+    
+    font-weight: bold;
+    border-radius: 19px;
+    font-size: 1.2rem;
+    background: var(--buttBack);
+    color: var(--buttColor);
+    border: solid 0.1px var(--bordCol);
+    
+}
+
+.C{
+    
+    
+    
+    
+    background: var(--buttCBack);
+    color: var(--buttCcolor);
+}
+.backbutt{
+    
+    
+    
+    
+   // width: 20px;
+   // height: 10px;
+}
+.operationBox{
+    position: absolute;
+    top: 70px;
+    left: 0%;
+    width: 100%;
+    height: calc(50% - 70px);
+    
+    border: solid 1px var(--bordCol);
+    
+    
+    
+    
+    
+}
+.row1{
+    
+    position: absolute;
+    top: 5px;
+    left: 0%;
+    width: 100%;
+    height: 25%;
+    background: var(--calcBack);
+    color: var(--buttColor);
+    font-weight: bold;
+    font-size: 4rem;
+    outline: none;
+    border: none;
+    
+    
+}

@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        
+        
+        
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Calculator SOLGOKZ</title>
+        
+         <link rel="stylesheet" href="main.css" type="text/css" media="all" />
+        
+    </head>
+    <body>
+        
+        
+        
+<div class="mainBox">
+            
+            
+ <nav>
+     
+     <h2 class="solgokz">SOLGOKZ</h2>
+     
+
+
+                
+            </nav>
+            
+            
+         <select name="" id="" class="selectTheme">
+         
+   <option value="">THEMES</option>
+     <option value="light">Light theme</option>
+    <option value="dark">Dark theme</option>
+        <option value="matrix">Matrix theme</option>
+             
+         </select>        
+            
+            
+            
+    <div class="operationBox">
+        
+        <input type="text" class="row1" readonly>
+            
+
+        
+        
+                
+            </div>
+            
+    <div class="buttonBox">
+          <button class="butt">Syn</button> 
+         <button class="butt">f²</button> 
+        <button class="butt">f³</button>
+        <button class="butt">f⁴</button>  
+         <button class="butt">Deg</button> 
+         <button class="butt">Cos</button> 
+         <button class="butt">Sin</button>
+         <button class="butt" value="tan(" >Tan</button>
+         <button class="butt">Inv</button> 
+         <button class="butt" value="e" >e</button> 
+         <button class="butt" value="lg" >Log</button> 
+         <button class="butt">Ln</button>
+         <button class="butt" value="^" >^</button> 
+         <button class="butt" value="!" >!</button> 
+         <button class="butt" value="π" >π</button> 
+         <button class="butt" value="√" >√</button> 
+         <button class="butt" value="(" >(</button>
+         <button class="butt" value=")" >)</button>
+
+        <button class="butt backbutt" value="<|"></button>
+      <button class="butt C"  value="c" >C</button> 
+         <button class="butt" value="1">1</button> 
+         <button class="butt" value="2">2</button> 
+         <button value="3" class="butt">3</button> 
+         <button value="/"  class="butt">÷</button>
+         <button value="4"  class="butt">4</button> 
+         <button class="butt" value="5" >5</button> 
+         <button class="butt" value="6">6</button> 
+         <button class="butt" value="*" >×</button> 
+         <button class="butt" value="7" >7</button> 
+         <button class="butt" value="8" >8</button> 
+         <button class="butt" value="9" >9</button>
+         <button class="butt" value="-" >-</button> 
+         <button class="butt" value="0" >0</button> 
+         <button class="butt" value="." >.</button> 
+         <button class="butt"value="=" >=</button> 
+         <button class="butt" value="+" >+</button> 
+            
+            
+            
+
+            
+            
+            
+            
+            
+            
+            
+            </div>
+            
+            
+            
+            
+        </div>
+        
+<script type="text/javascript" charset="utf-8">
+            
+            
+            
+  const cssRoot = document.querySelector(":root");
+
+   const backbutt=document.querySelector(".backbutt");
+   
+const   selectTheme =document.querySelector(".selectTheme");
+
+const   row1 =document.querySelector(".row1");
+
+
+const   butt =document.querySelectorAll(".butt");
+let valToCalc="";
+
+
+
+
+row1.value ==="0";
+
+
+
+
+//FUJCTIONS
+butt.forEach((button,index)=>{
+    
+    button.addEventListener("click",(el)=>{
+    
+
+
+if(row1.value ==="0") {
+
+ row1.value=""; }
+    
+if(el.target.value !="<|" && el.target.value !="=" ){
+
+row1.value +=el.target.value;
+
+
+}
+if(el.target.value==="<|"){
+    
+   valToCalc =row1.value ;
+    
+    row1.value ="";
+    row1.value=
+ valToCalc.slice(0,valToCalc.length -1);;//row1.value.slice(0,row1.length -1)
+    
+    if(row1.value ===""){
+        
+        row1.value="0";}
+}
+
+
+if(el.target.value==="c"){
+    row1.value="0";
+} 
+
+
+const e=Math.E;
+const π=Math.PI;
+if(el.target.value==="e()"){
+    
+    
+ //   row1.value +=e();
+}
+if(el.target.value==="="){
+    valToCalc="";
+    valToCalc= row1.value;
+    
+   // setTimeout(()=>{row1.value=   eval(valToCalc);},150)
+    
+row1.value=   eval(valToCalc);
+ 
+}
+    
+});
+    
+    
+});
+
+
+
+            
+ if (!localStorage.getItem("colortheme_calculator")){
+                
+         localStorage.setItem("colortheme_calculator","light");
+                
+                
+            }
+            
+            
+            
+   //  localStorage.setItem("colortheme_calculator","light");
+                
+         
+    function setInitalStyles(){     
+         if(localStorage.getItem("colortheme_calculator")==="light")   {
+             
+             
+   backbutt.style.backgroundImage=`url("images/deleteblack.png")`;
+   backbutt.style.backgroundSize="45px";
+   backbutt.style.backgroundRepeat="no-repeat";
+   backbutt.style.backgroundPosition = "center";
+   
+   
+   cssRoot.style.setProperty("--buttColor","#000000");
+  
+   
+   
+  cssRoot.style.setProperty("--buttBack","linear-gradient(to bottom, lightblue,#FFFFFF,#FFFFFF)");
+  
+  
+  cssRoot.style.setProperty("--bordCol","lightblue");
+  
+  cssRoot.style.setProperty("--navBack","linear-gradient(to top, lightblue,#FFFFFF)");
+  
+   
+   cssRoot.style.setProperty("--solgokzCol","#000000");
+   cssRoot.style.setProperty("--buttCBack","linear-gradient(to bottom,#000000,#FFFFFF)");
+   
+   cssRoot.style.setProperty("--buttCcolor","#FFFFFF");
+   
+   cssRoot.style.setProperty("--mainBoxBack","#FFFFFF");
+   cssRoot.style.setProperty("--calcBack","#FFFFFF");
+   
+   
+       
+   /*  --buttw: auto;  
+    --bordCol:lightblue;
+    --buttBack:linear-gradient(to bottom, lightblue,#FFFFFF,#FFFFFF);
+    
+    --navBack:linear-gradient(to top, lightblue,#FFFFFF);
+    --solgokzCol:#000000;
+    --buttCBack:linear-gradient(to bottom,#000000,#FFFFFF);
+    
+    
+    --buttCcolor:#FFFFFF;*/
+             
+         }else if(localStorage.getItem("colortheme_calculator")==="dark"){
+             
+             
+     backbutt.style.backgroundImage=`url("images/deletewhite.jpg")`;
+   backbutt.style.backgroundSize="35px";
+   backbutt.style.backgroundRepeat="no-repeat";
+   backbutt.style.backgroundPosition = "center";
+   
+   
+   
+   
+   cssRoot.style.setProperty("--buttColor","#FFFFFF");
+  
+   
+  cssRoot.style.setProperty("--buttBack","linear-gradient(to bottom, #000000,#000000,lightblue)");
+  
+  
+  cssRoot.style.setProperty("--bordCol","lightblue");
+  
+  cssRoot.style.setProperty("--navBack","linear-gradient(to bottom, #000000,#000000)");
+  
+   
+   cssRoot.style.setProperty("--solgokzCol","#FFFFFF");
+   cssRoot.style.setProperty("--buttCBack","white");
+   
+   cssRoot.style.setProperty("--buttCcolor","#000000");
+   
+    cssRoot.style.setProperty("--mainBoxBack","#000000");
+             
+             
+    cssRoot.style.setProperty("--calcBack","#000000");
+             
+             
+             
+         }
+            
+            
+            
+            
+            
+    }
+    
+    
+    
+    setInitalStyles();
+    
+    
+    
+    
+    selectTheme.addEventListener("change",(e)=>{
+        
+        
+        
+      if(e.target.value==="light"){
+          localStorage.setItem("colortheme_calculator","light");
+          
+          setTimeout(()=>{setInitalStyles();},100);
+          
+          
+      }  else if(e.target.value==="dark"){
+          localStorage.setItem("colortheme_calculator","dark");
+           setTimeout(()=>{setInitalStyles();},100);
+           
+    
+      }
+        
+    });
+        </script>
+    
+    </body>
+</html>
