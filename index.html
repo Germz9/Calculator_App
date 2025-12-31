@@ -54,15 +54,15 @@
          <button class="butt">f²</button> 
         <button class="butt">f³</button>
         <button class="butt">f⁴</button>  
-         <button class="butt">Deg</button> 
-         <button class="butt">Cos</button> 
-         <button class="butt">Sin</button>
+         <button class="butt" value="angle_measure">Deg</button> 
+         <button class="butt" value="cos(">Cos</button> 
+         <button class="butt" value="sin(">Sin</button>
          <button class="butt" value="tan(" >Tan</button>
          <button class="butt">Inv</button> 
          <button class="butt" value="e" >e</button> 
          <button class="butt" value="lg" >Log</button> 
          <button class="butt">Ln</button>
-         <button class="butt" value="^" >^</button> 
+         <button class="butt" value="p()" >^</button> 
          <button class="butt" value="!" >!</button> 
          <button class="butt" value="π" >π</button> 
          <button class="butt" value="√" >√</button> 
@@ -83,8 +83,9 @@
          <button class="butt" value="8" >8</button> 
          <button class="butt" value="9" >9</button>
          <button class="butt" value="-" >-</button> 
-         <button class="butt" value="0" >0</button> 
+
          <button class="butt" value="." >.</button> 
+      <button class="butt" value="0" >0</button> 
          <button class="butt"value="=" >=</button> 
          <button class="butt" value="+" >+</button> 
             
@@ -124,6 +125,13 @@ const   row1 =document.querySelector(".row1");
 
 
 const   butt =document.querySelectorAll(".butt");
+
+if(!localStorage.getItem("angle_measure") ){
+    
+    
+    
+    localStorage.setItem("angle_measure","degrees");
+}
 let valToCalc="";
 
 
@@ -145,12 +153,41 @@ if(row1.value ==="0") {
 
  row1.value=""; }
     
-if(el.target.value !="<|" && el.target.value !="=" ){
+if(el.target.value !="<|" && el.target.value !="=" && el.target.value !="angle_measure" ){
 
 row1.value +=el.target.value;
 
 
 }
+
+if(el.target.value==="angle_measure"){
+    
+    
+    
+    if(row1.value===""){
+        
+        row1.value="0";
+    }
+    if(localStorage.getItem("angle_measure")==="degrees"){
+        
+        el.target.innerText="Rad";
+        
+        localStorage.setItem("angle_measure","radians")
+    }else if(localStorage.getItem("angle_measure")==="radians"){
+        
+        el.target.innerText="Deg";
+        
+                
+        localStorage.setItem("angle_measure","degrees");
+        
+        
+    }
+    
+    
+    
+}
+
+
 if(el.target.value==="<|"){
     
    valToCalc =row1.value ;
@@ -169,6 +206,49 @@ if(el.target.value==="c"){
     row1.value="0";
 } 
 
+function p(base,exp){
+    
+    
+    return base**exp;
+}
+function tan(ang){
+    
+      if(localStorage.getItem("angle_measure")==="degrees"){
+        
+  ang= ang*(Math.PI/180);
+        return Math.tan(ang);
+    }  
+    
+    
+    
+    
+    return Math.tan(ang);
+}
+function cos(ang){
+    
+    if(localStorage.getItem("angle_measure")==="degrees"){
+             
+        
+        return Math.cos(ang);
+    }
+    
+    ang= ang*(180/Math.PI);
+    return Math.cos(ang);
+}
+
+
+function sin(ang){
+    
+   if(localStorage.getItem("angle_measure")==="degrees"){
+        
+                ang= ang*(Math.PI/180);
+      return Math.sin(ang);
+    }
+    
+    
+    
+    return Math.sin(ang);
+}
 
 const e=Math.E;
 const π=Math.PI;
@@ -253,7 +333,7 @@ row1.value=   eval(valToCalc);
          }else if(localStorage.getItem("colortheme_calculator")==="dark"){
              
              
-     backbutt.style.backgroundImage=`url("images/deletewhite.jpg")`;
+     backbutt.style.backgroundImage=`url("images/deletewhite.png")`;
    backbutt.style.backgroundSize="35px";
    backbutt.style.backgroundRepeat="no-repeat";
    backbutt.style.backgroundPosition = "center";
