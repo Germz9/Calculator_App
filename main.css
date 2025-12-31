@@ -78,26 +78,27 @@ nav{
 
 .buttonBox{
     
-    
+    position: absolute;
+    bottom:0px;
+    left:0px;
     
     display: grid;
-    grid-template-columns:  var(--buttw  ) var(--buttw  ) var(--buttw  ) var(--buttw  ); 
+    grid-template-columns:  var(--buttw) var(--buttw) var(--buttw) var(--buttw); 
     grid-gap: 5px;
     
-    width: 100%;
+    width:100%;
     
-    height: 50%;
-    position: absolute;
+    height:50%;
+    
 
-    bottom: 0px;
-    left: 0px;
+    
+} 
     
     
     
     
     
-    
-}
+
 
 .butt{
     
