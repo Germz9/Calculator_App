@@ -16,7 +16,7 @@
     --buttCcolor:#FFFFFF;
     --mainBoxBack:#FFFFFF;
     --calcBack:#FFFFFF;
-    
+    --innerHeight:20px;
 }
 
 
@@ -67,7 +67,7 @@ nav{
     left:0px;
     top:0px;
     width:100%;
-    height:100%;
+    height:var(--innerHeight);
     background: var(--mainBoxBack);
     
     
