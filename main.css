@@ -17,6 +17,8 @@
     --mainBoxBack:#FFFFFF;
     --calcBack:#FFFFFF;
     --innerHeight:20px;
+    --backImg:#000000;
+    --numShine:0px 0px 0px transparent;
 }
 
 
@@ -27,12 +29,14 @@ body{
     padding-left:2px;
     padding-right:2px;
     margin: 0%;
+
     background: var(--mainBoxBack);
+        
     height: var(--innerHeight);
 }
 nav{
     
-    position: absolute;
+    position: relative;
     display: flex;
     align-items:center;
     justify-content: center;
@@ -54,12 +58,24 @@ nav{
     
     position: absolute;
     right: 1px;
-    top: 50px;
+    top: 53px;
     width: 20%;
     color: var(--buttColor);
     background: var(--buttBack);
     font-weight: bold;
+    font-size: 10px;
+    border:solid 0.5px var(--bordCol);
+    outline-color: var(--bordCol) ;
+    outline: 0.5px;
 }
+
+
+.selectTheme option:active,
+.selectTheme option:checked{
+     
+      
+       
+    }
 .mainBox{
     
     
@@ -69,8 +85,8 @@ nav{
     top:0px;
     width:100%;
     height:var(--innerHeight);
+    
     background: var(--mainBoxBack);
-    border: solid var(--bordCol) 1px;
     
     
     
@@ -112,6 +128,15 @@ nav{
     border: solid 0.1px var(--bordCol);
     
 }
+.butt:active{
+    
+    
+    
+  transform: scale(1.5);
+  
+
+  box-shadow: 0 0 10px 1px var(--buttColor), 0 0 10px 1px var(--buttColor), 0 0 10px 1px var(--buttColor), 0 0 10px 1px var(--buttColor), 0 0 15px 1px var(--buttColor);
+}
 
 .C{
     
@@ -135,7 +160,10 @@ nav{
     left: 0%;
     width: 100%;
     height: calc(50% - 70px);
+        background-image: var(--backImg);
     
+    background-repeat: no-repeat;
+    background-size: cover;
     border: solid 1px var(--bordCol);
     
     
@@ -150,12 +178,28 @@ nav{
     left: 0%;
     width: 100%;
     height: 25%;
-    background: var(--calcBack);
+    background: transparent;
     color: var(--buttColor);
     font-weight: bold;
-    font-size: 4rem;
+    font-size: 3rem;
     outline: none;
     border: none;
+    text-shadow: var(--numShine);
+    
+    
+}
+
+.calculator{
+    
+    position: absolute;
+    top:40%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    color: var(--buttColor);
+    text-shadow: var(--numShine);
+
+    letter-spacing:15px;
+    z-index: 10;
     
     
 }

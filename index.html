@@ -21,7 +21,7 @@
  <nav>
      
      <h2 class="solgokz">SOLGOKZ</h2>
-     
+     <h6 class="calculator">CALCULATOR</h6>
 
 
                 
@@ -54,15 +54,15 @@
          <button class="butt">f²</button> 
         <button class="butt">f³</button>
         <button class="butt">f⁴</button>  
-         <button class="butt" value="angle_measure">Deg</button> 
-         <button class="butt" value="cos(">Cos</button> 
-         <button class="butt" value="sin(">Sin</button>
-         <button class="butt" value="tan(" >Tan</button>
-         <button class="butt">Inv</button> 
+         <button class="butt degbutt" value="angle_measure">Deg</button> 
+         <button class="butt cosbutt" value="cos(">Cos</button> 
+         <button class="butt sinbutt" value="sin(">Sin</button>
+         <button class="butt tanbutt" value="tan(" >Tan</button>
+         <button class="butt invbutt" value="inv">Inv</button> 
          <button class="butt" value="e" >e</button> 
-         <button class="butt" value="lg" >Log</button> 
-         <button class="butt">Ln</button>
-         <button class="butt" value="p()" >^</button> 
+         <button class="butt" value="log(" >log</button> 
+         <button class="butt"value="ln(">ln</button>
+         <button class="butt" value="**" >^</button> 
          <button class="butt" value="!" >!</button> 
          <button class="butt" value="π" >π</button> 
          <button class="butt" value="√" >√</button> 
@@ -122,16 +122,67 @@
 const   selectTheme =document.querySelector(".selectTheme");
 
 const   row1 =document.querySelector(".row1");
+const   degbutt =document.querySelector(".degbutt");
+const   invbutt =document.querySelector(".invbutt");
+
+const   sinbutt =document.querySelector(".sinbutt");
+
+const   cosbutt =document.querySelector(".cosbutt");
 
 
+const   tanbutt =document.querySelector(".tanbutt");
 const   butt =document.querySelectorAll(".butt");
 
-if(!localStorage.getItem("angle_measure") ){
+
+
+//LOCAL STORAGE VARIABLES
+
+const angle_measure="angle_measure";
+const inv="inv";
+
+const degrees="degrees";
+const radians="radians";
+
+const trig= "trig";
+const inv_trig="inv_trig";
+
+if(!localStorage.getItem(angle_measure) ){
     
     
     
-    localStorage.setItem("angle_measure","degrees");
+    localStorage.setItem(angle_measure,degrees);
 }
+
+
+if(localStorage.getItem(angle_measure)=== degrees){
+degbutt.innerText="Deg";
+
+}else{
+    
+    degbutt.innerText="Rad";
+
+}
+
+if(!localStorage.getItem(inv) ){
+    
+    
+    
+    localStorage.setItem(inv,trig);
+}
+
+
+if(localStorage.getItem(inv)===trig){
+sinbutt.innerText= "Sin";
+cosbutt.innerText= "Cos";
+tanbutt.innerText= "Tan";
+}else if(localStorage.getItem(inv)===inv_trig){
+    
+sinbutt.innerText= "Csc";
+cosbutt.innerText= "Sec";
+tanbutt.innerText= "Cot";   
+    
+}
+
 let valToCalc="";
 
 
@@ -147,27 +198,35 @@ butt.forEach((button,index)=>{
     
     button.addEventListener("click",(el)=>{
     
-
+function puttheZero(){
+    
+        if(row1.value===""){
+        
+        row1.value="0";
+    }
+}
 
 if(row1.value ==="0") {
 
  row1.value=""; }
     
-if(el.target.value !="<|" && el.target.value !="=" && el.target.value !="angle_measure" ){
+if(el.target.value !="<|" && el.target.value !="=" && el.target.value !="angle_measure" && el.target.value != inv && el.target.value !="c"){
 
-row1.value +=el.target.value;
+
+
+
+
+    
+    row1.value +=el.target.value;
 
 
 }
 
 if(el.target.value==="angle_measure"){
     
+    puttheZero();
     
-    
-    if(row1.value===""){
-        
-        row1.value="0";
-    }
+
     if(localStorage.getItem("angle_measure")==="degrees"){
         
         el.target.innerText="Rad";
@@ -186,6 +245,81 @@ if(el.target.value==="angle_measure"){
     
     
 }
+
+//inv toggling func
+
+
+if(el.target.value==="inv"){
+    
+    puttheZero();
+    
+
+    if(localStorage.getItem(inv)==="trig"){
+        
+        sinbutt.innerText="Csc";
+        cosbutt.innerText="Sec";
+        tanbutt.innerText="Cot";
+        
+        localStorage.setItem(inv,inv_trig);
+        
+        tanbutt.value="ctan(";
+        sinbutt.value="csc(";
+        cosbutt.value="sec(";
+        
+        
+
+        
+        
+    }else if(localStorage.getItem(inv)===inv_trig){
+        
+        
+           
+        
+        sinbutt.innerText="Sin";
+        cosbutt.innerText="Cos";
+        tanbutt.innerText="Tan";
+        
+    localStorage.setItem(inv,"trig");
+    
+    
+        tanbutt.value="tan(";
+        sinbutt.value="sin(";
+        cosbutt.value="cos(";
+        
+    
+    
+            
+        if(el.target.value==="ctan("){
+            
+            
+            el.target.value="tan("
+        }
+        
+                
+        if(el.target.value==="csc("){
+            
+            
+            el.target.value="sin("
+        }
+        
+                
+        if(el.target.value==="sec("){
+            
+            
+            el.target.value="cos("
+        }
+        
+        
+        
+    }
+    
+    
+    
+}
+
+
+
+
 
 
 if(el.target.value==="<|"){
@@ -211,19 +345,29 @@ function p(base,exp){
     
     return base**exp;
 }
+
+
 function tan(ang){
     
       if(localStorage.getItem("angle_measure")==="degrees"){
-        
-  ang= ang*(Math.PI/180);
+          
+    
+              ang= ang*(Math.PI/180);
         return Math.tan(ang);
-    }  
+     }
+          
     
+        return ( Math.tan(ang));
+}   
+          
     
+    function ctan(ang){
+        
+        
+        return (1/tan(ang));
+    }
     
-    
-    return Math.tan(ang);
-}
+
 function cos(ang){
     
     if(localStorage.getItem("angle_measure")==="degrees"){
@@ -233,9 +377,15 @@ function cos(ang){
     }
     
     ang= ang*(180/Math.PI);
-    return Math.cos(ang);
 }
+function sec(ang){
+    
+    return ( 1/cos(ang));
 
+    
+    
+    
+}
 
 function sin(ang){
     
@@ -250,6 +400,30 @@ function sin(ang){
     return Math.sin(ang);
 }
 
+
+
+
+function csc(ang){
+    
+   return (1/sin(ang));
+}
+
+
+
+
+function log(x){
+    
+    
+    return Math.log10(x);
+}
+
+function ln(x){
+    
+    
+    return Math.log(x);
+}
+
+
 const e=Math.E;
 const π=Math.PI;
 if(el.target.value==="e()"){
@@ -262,8 +436,18 @@ if(el.target.value==="="){
     valToCalc= row1.value;
     
    // setTimeout(()=>{row1.value=   eval(valToCalc);},150)
+    let calculation=eval(valToCalc);
     
-row1.value=   eval(valToCalc);
+    console.log(typeof calculation);
+    
+    if(calculation.toString()==="undefined"){
+        
+        
+        calculation=0;
+     // puttheZero();
+    
+    }
+row1.value= calculation;  
  
 }
     
@@ -290,12 +474,13 @@ row1.value=   eval(valToCalc);
     function setInitalStyles(){     
          if(localStorage.getItem("colortheme_calculator")==="light")   {
              
-             
+     cssRoot.style.setProperty("--backImg",`white`);
    backbutt.style.backgroundImage=`url("images/deleteblack.png")`;
    backbutt.style.backgroundSize="45px";
    backbutt.style.backgroundRepeat="no-repeat";
    backbutt.style.backgroundPosition = "center";
-   
+   cssRoot.style.setProperty("--numShine",`0px 0px 0px transparent`);
+    
    
    cssRoot.style.setProperty("--buttColor","#000000");
   
@@ -333,11 +518,19 @@ row1.value=   eval(valToCalc);
          }else if(localStorage.getItem("colortheme_calculator")==="dark"){
              
              
+             
+             
+             
+     cssRoot.style.setProperty("--backImg",`black`);
+             
      backbutt.style.backgroundImage=`url("images/deletewhite.png")`;
    backbutt.style.backgroundSize="35px";
    backbutt.style.backgroundRepeat="no-repeat";
    backbutt.style.backgroundPosition = "center";
    
+   
+   cssRoot.style.setProperty("--numShine",`0px 0px 0px transparent`);
+    
    
    
    
@@ -364,8 +557,46 @@ row1.value=   eval(valToCalc);
              
              
              
-         }
+         }else if(localStorage.getItem("colortheme_calculator")==="matrix"){
+             
+             
+     backbutt.style.backgroundImage=`url("images/deletewhite.png")`;
+     
+     
+   backbutt.style.backgroundSize="35px";
+   backbutt.style.backgroundRepeat="no-repeat";
+   backbutt.style.backgroundPosition = "center";
+   
+   cssRoot.style.setProperty("--numShine",`0px 0px 5px magenta,0px 0px 5px black, 0 0 5px white,0 0 16px white`);
+    
+   
+   cssRoot.style.setProperty("--backImg",`url("images/matrix.gif")`);
+  
+   
+   cssRoot.style.setProperty("--buttColor","limegreen");
+  
+   
+  cssRoot.style.setProperty("--buttBack","linear-gradient(to bottom,#000000,#000000,limegreen)");
+  
+  
+  cssRoot.style.setProperty("--bordCol","limegreen");
+  
+  cssRoot.style.setProperty("--navBack","linear-gradient(to bottom,limegreen,#000000)");
+  
+   
+   cssRoot.style.setProperty("--solgokzCol","limegreen");
+   cssRoot.style.setProperty("--buttCBack","limegreen");
+   
+   cssRoot.style.setProperty("--buttCcolor","#000000");
+   
+    cssRoot.style.setProperty("--mainBoxBack","#000000");
+             
+             
+    cssRoot.style.setProperty("--calcBack","#000000");
+             
+             
             
+         }
             
             
             
@@ -390,10 +621,18 @@ row1.value=   eval(valToCalc);
           
           
       }  else if(e.target.value==="dark"){
-          localStorage.setItem("colortheme_calculator","dark");
+          localStorage.setItem("colortheme_calculator","dark")
+          
            setTimeout(()=>{setInitalStyles();},100);
            
     
+      }else if(e.target.value==="matrix"){
+        localStorage.setItem("colortheme_calculator","matrix")
+        
+           setTimeout(()=>{setInitalStyles();},100);
+          
+          
+          
       }
         
     });
