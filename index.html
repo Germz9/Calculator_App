@@ -26,9 +26,13 @@
 
                 
             </nav>
-            
+              <button class="calcType" ></button>
             
          <select name="" id="" class="selectTheme">
+             
+             
+             
+           
          
    <option value="">THEMES</option>
      <option value="light">Light theme</option>
@@ -50,7 +54,9 @@
             </div>
             
     <div class="buttonBox">
-          <button class="butt">Syn</button> 
+
+    
+        <button class="butt">Syn</button> 
          <button class="butt">f²</button> 
         <button class="butt">f³</button>
         <button class="butt">f⁴</button>  
@@ -87,10 +93,10 @@
          <button class="butt" value="." >.</button> 
       <button class="butt" value="0" >0</button> 
          <button class="butt"value="=" >=</button> 
-         <button class="butt" value="+" >+</button> 
+         <button class="butt" value="+" >+</button>
             
-            
-            
+
+
 
             
             
@@ -101,25 +107,132 @@
             
             </div>
             
+            <div class="buttonBox2">
+                
+                       <button class="butt" value="(" >(</button>
+         <button class="butt" value=")" >)</button>
+
+        <button class="butt backbutt2" value="<|"></button>
+      <button class="butt C"  value="c" >C</button> 
+         <button class="butt" value="1">1</button> 
+         <button class="butt" value="2">2</button> 
+         <button value="3" class="butt">3</button> 
+         <button value="/"  class="butt">÷</button>
+         <button value="4"  class="butt">4</button> 
+         <button class="butt" value="5" >5</button> 
+         <button class="butt" value="6">6</button> 
+         <button class="butt" value="*" >×</button> 
+         <button class="butt" value="7" >7</button> 
+         <button class="butt" value="8" >8</button> 
+         <button class="butt" value="9" >9</button>
+         <button class="butt" value="-" >-</button> 
+
+         <button class="butt" value="." >.</button> 
+      <button class="butt" value="0" >0</button> 
+         <button class="butt"value="=" >=</button> 
+         <button class="butt" value="+" >+</button>
+                
+            </div>
+            
             
             
             
         </div>
         
 <script type="text/javascript" charset="utf-8">
+           
+    const   buttonBox =document.querySelector(".buttonBox");       
+          
+          
+          
+  const   buttonBox2 =document.querySelector(".buttonBox2");       
+           
             
-            
-            
-  const cssRoot = document.querySelector(":root");
+            let arrButt=[
+  `<button class="butt">Syn</button>`,
+`<button class="butt">f²</button>`,
+`<button class="butt">f³</button>`,
+`<button class="butt">f⁴</button>`,
+  `<button class="butt degbutt" id="degbutt" value="angle_measure">Deg</button>`,
+  
+`<button class="butt cosbutt" value="cos(">Cos</button>`,
+
+`<button class="butt sinbutt" value="sin(">Sin</button>`,
+  `<button class="butt tanbutt" value="tan(" >Tan</button>`,
+         
+` <button class="butt invbutt" value="inv">Inv</button> `,
+ `<button class="butt" value="e" >e</button>`,
+ 
+`<button class="butt" value="log(" >log</button> `,
+
+`<button class="butt"value="ln(">ln</button>`,
+`<button class="butt" value="**" >^</button>`, 
+`<button class="butt" value="!" >!</button>`,
+`<button class="butt" value="π" >π</button>`, 
+`<button class="butt" value="√" >√</button>`, 
+ `<button class="butt" value="(" >(</button>`,
+` <button class="butt" value=")" >)</button>`,
+
+`<button class="butt backbutt" value="<|"></button>`,
+`<button class="butt C"  value="c" >C</button>`,
+`<button class="butt" value="1">1</button>`,
+         `<button class="butt" value="2">2</button>`,
+         `<button value="3" class="butt">3</button>`,
+`<button value="/"  class="butt">÷</button>`,
+`<button value="4"  class="butt">4</button>`,
+`<button class="butt" value="5" >5</button>`,
+` <button class="butt" value="6">6</button>`,
+` <button class="butt" value="*" >×</button>`,
+`<button class="butt" value="7" >7</button>`, 
+`<button class="butt" value="8" >8</button>`,
+`<button class="butt" value="9" >9</button>`,
+`<button class="butt" value="-" >-</button>`,
+`<button class="butt" value="." >.</button>`,
+`<button class="butt" value="0" >0</button>`, 
+`<button class="butt"value="=" >=</button>`,
+` <button class="butt" value="+" >+</button>`
+  
+
+    
+]
+
+//buttonBox.appendChild("<button> mama-mela</button>");
+
+
+
+const cssRoot = document.querySelector(":root");
+
+    
+  
+
+/*const awohArr=[];
+    
+     arrButt.forEach((i,indet)=>{
+         
+
+       let awoh= document.createElement("div");
+        awoh.innerHTML=i;
+        
+           if(indet<16){
+        awoh.style.display="none";}
+     
+       buttonBox.appendChild(awoh);
+       awohArr.push(awoh);
+       
+       }); */
+       
+
+       
   
   
   cssRoot.style.setProperty("--innerHeight",window.innerHeight+"px");
   
   
 
-   const backbutt=document.querySelector(".backbutt");
+ const   backbutt=document.querySelector(".backbutt");
+   const backbutt2=document.querySelector(".backbutt2");
    
-const   selectTheme =document.querySelector(".selectTheme");
+ const  selectTheme =document.querySelector(".selectTheme");
 
 const   row1 =document.querySelector(".row1");
 const   degbutt =document.querySelector(".degbutt");
@@ -131,12 +244,75 @@ const   cosbutt =document.querySelector(".cosbutt");
 
 
 const   tanbutt =document.querySelector(".tanbutt");
+
+
+const   calcType =document.querySelector(".calcType");
+
+
 const   butt =document.querySelectorAll(".butt");
 
 
 
 //LOCAL STORAGE VARIABLES
 
+
+
+if(!localStorage.getItem("calcType")){
+    
+
+
+  localStorage.setItem("calcType","normal_calc");
+      
+    
+    
+}
+
+
+function calcTypeToggle(){
+
+
+if(localStorage.getItem("calcType")==="normal_calc"){
+    
+    
+    calcType.innerText="REG CALC";
+    buttonBox2.style.display="grid";
+    
+        
+    buttonBox.style.display="none";
+}else{
+    calcType.innerText="SCI CALC";
+    
+    buttonBox.style.display="grid";
+    buttonBox2.style.display="none";
+}
+
+}
+
+calcTypeToggle();
+
+
+calcType.addEventListener("click",(e)=>{
+    
+    if(localStorage.getItem("calcType")==="normal_calc"){
+    
+    localStorage.setItem("calcType","science_calc")
+    
+    
+    e.target.innerText="SCI CALC";
+    
+setTimeout(()=>{calcTypeToggle();},100)
+        
+    }else{
+        
+        localStorage.setItem("calcType","normal_calc")
+        
+        e.target.innerText="REG CALC";
+        
+        setTimeout(()=>{calcTypeToggle();},100);
+        
+        
+    }
+})
 const angle_measure="angle_measure";
 const inv="inv";
 
@@ -190,13 +366,28 @@ let valToCalc="";
 
 row1.value ="0";
 
+//const thebox
+            
+
+
+
+//buttonBox.appendChild(thebox);
+
+
 
 
 
 //FUJCTIONS
 butt.forEach((button,index)=>{
     
+    
     button.addEventListener("click",(el)=>{
+        
+        
+        
+   
+   
+        
     
 function puttheZero(){
     
@@ -479,6 +670,17 @@ row1.value= calculation;
    backbutt.style.backgroundSize="45px";
    backbutt.style.backgroundRepeat="no-repeat";
    backbutt.style.backgroundPosition = "center";
+   
+   
+   
+   
+        
+     backbutt2.style.backgroundImage=`url("images/deleteblack.png")`;
+     
+     
+     backbutt2.style.backgroundSize="45px";
+   backbutt2.style.backgroundRepeat="no-repeat";
+   backbutt2.style.backgroundPosition = "center";
    cssRoot.style.setProperty("--numShine",`0px 0px 0px transparent`);
     
    
@@ -529,6 +731,14 @@ row1.value= calculation;
    backbutt.style.backgroundPosition = "center";
    
    
+        
+     backbutt2.style.backgroundImage=`url("images/deletewhite.png")`;
+     
+     
+     backbutt2.style.backgroundSize="35px";
+   backbutt2.style.backgroundRepeat="no-repeat";
+   backbutt2.style.backgroundPosition = "center";
+   
    cssRoot.style.setProperty("--numShine",`0px 0px 0px transparent`);
     
    
@@ -561,6 +771,14 @@ row1.value= calculation;
              
              
      backbutt.style.backgroundImage=`url("images/deletewhite.png")`;
+     
+     
+     backbutt2.style.backgroundImage=`url("images/deletewhite.png")`;
+     
+     
+     backbutt2.style.backgroundSize="35px";
+   backbutt2.style.backgroundRepeat="no-repeat";
+   backbutt2.style.backgroundPosition = "center";
      
      
    backbutt.style.backgroundSize="35px";
@@ -602,7 +820,6 @@ row1.value= calculation;
             
             
     }
-    
     
     
     setInitalStyles();
