@@ -42,23 +42,26 @@
          </select>        
             
             
-            
-    <div class="operationBox">
+<div class="operationBox">
         
-        <input type="text" class="row1" readonly>
-            
+    <input type="text"  class="row1" value=""readonly/>
+    
+    <input maxlength="1" type="text"  class="rowsign" readonly="true"/>
+    
+     <input  type="text"  class="rowresult" readonly/>
 
         
         
                 
-            </div>
+ </div>
             
     <div class="buttonBox">
 
     
         <button class="butt">Syn</button> 
          <button class="butt">f²</button> 
-        <button class="butt">f³</button>
+        <button class="butt" value="%">%</button>
+        
         <button class="butt">f⁴</button>  
          <button class="butt degbutt" value="angle_measure">Deg</button> 
          <button class="butt cosbutt" value="cos(">Cos</button> 
@@ -89,15 +92,18 @@
          <button class="butt" value="8" >8</button> 
          <button class="butt" value="9" >9</button>
          <button class="butt" value="-" >-</button> 
+<div class="last-row">
+    
+    <button class="butt first2" value="," >,</button>
+         <button class="butt first2" value="." >.</button> 
+      <button class="butt last3" value="0" >0</button> 
+         <button class="butt last3"value="=" >=</button> 
+         <button class="butt last3" value="+" >+</button>
 
-         <button class="butt" value="." >.</button> 
-      <button class="butt" value="0" >0</button> 
-         <button class="butt"value="=" >=</button> 
-         <button class="butt" value="+" >+</button>
             
 
 
-
+</div>
             
             
             
@@ -228,6 +234,14 @@ const cssRoot = document.querySelector(":root");
   cssRoot.style.setProperty("--innerHeight",window.innerHeight+"px");
   
   
+    
+  cssRoot.style.setProperty("--innerWidth",(window.innerWidth-30)+"px");
+  
+  
+  cssRoot.style.setProperty("--halfinnerWidth",(window.innerWidth/2)+"px");
+  
+  
+  
 
  const   backbutt=document.querySelector(".backbutt");
    const backbutt2=document.querySelector(".backbutt2");
@@ -247,6 +261,10 @@ const   tanbutt =document.querySelector(".tanbutt");
 
 
 const   calcType =document.querySelector(".calcType");
+
+const   rowsign =document.querySelector(".rowsign");
+
+const   rowresult =document.querySelector(".rowresult");
 
 
 const   butt =document.querySelectorAll(".butt");
@@ -359,6 +377,17 @@ tanbutt.innerText= "Cot";
     
 }
 
+//row1.addEventListener('input', () => {
+
+//row1.scrollLeft = row1.scrollWidth; });
+
+
+//input type="text" id="my Input" style="width: 200px; overflow-x: auto; ">
+
+//row1.addEventListener('input', function() { this.scrollLeft = this.scrollWidth; });
+
+
+
 let valToCalc="";
 
 
@@ -375,17 +404,23 @@ row1.value ="0";
 
 
 
-
+//ow1.addEventListener('input', function() { this.scrollLeft = this.scrollWidth; });
+let rsultbool=false;
 
 //FUJCTIONS
+
 butt.forEach((button,index)=>{
     
     
     button.addEventListener("click",(el)=>{
         
-        
-        
-   
+        row1.scrollWidth = row1.scrollWidth /2;
+        console.log("venga ",row1.scrollLeft  );
+ //  row1.scrollLeft =innerWidth;
+
+//row1.scrollWidth
+
+console.log(row1.scrollWidth," ",innerWidth);
    
         
     
@@ -412,6 +447,64 @@ if(el.target.value !="<|" && el.target.value !="=" && el.target.value !="angle_m
 
 
 }
+
+
+
+if(el.target.value==="/" || el.target.value==="+"|| el.target.value==="-" || el.target.value==="*" || el.target.value==="%" ){
+    
+    let mySign="";//el.target.value==="/" ? "÷" : el.target.value;
+    
+    switch(el.target.value){
+        
+        
+        
+        
+        case "+":
+            mySign=el.target.value;
+            
+            break;
+            
+            
+
+            case "-":
+            mySign=el.target.value;
+            
+            break;
+            
+            
+            
+            
+            case "*":
+            mySign="×";
+            
+            break;
+            
+            
+            case "/":
+            mySign="÷";
+            
+            break;
+            
+            
+            case "%":
+            mySign=el.target.value;
+            
+            break;
+            
+            
+            
+            
+            
+    }
+    
+    
+    
+    rowsign.value=mySign;
+    
+
+}
+
+
 
 if(el.target.value==="angle_measure"){
     
@@ -513,6 +606,7 @@ if(el.target.value==="inv"){
 
 
 
+
 if(el.target.value==="<|"){
     
    valToCalc =row1.value ;
@@ -529,6 +623,10 @@ if(el.target.value==="<|"){
 
 if(el.target.value==="c"){
     row1.value="0";
+    rowsign.value="";
+    rowresult.value="";
+    rsultbool=false;
+   cssRoot.style.setProperty("--backResult","transparent");
 } 
 
 function p(base,exp){
@@ -537,7 +635,7 @@ function p(base,exp){
     return base**exp;
 }
 
-
+//  TRIGONOMETRIC FUNCTIONS
 function tan(ang){
     
       if(localStorage.getItem("angle_measure")==="degrees"){
@@ -617,16 +715,12 @@ function ln(x){
 
 const e=Math.E;
 const π=Math.PI;
-if(el.target.value==="e()"){
-    
-    
- //   row1.value +=e();
-}
+
 if(el.target.value==="="){
     valToCalc="";
     valToCalc= row1.value;
     
-   // setTimeout(()=>{row1.value=   eval(valToCalc);},150)
+  
     let calculation=eval(valToCalc);
     
     console.log(typeof calculation);
@@ -635,17 +729,121 @@ if(el.target.value==="="){
         
         
         calculation=0;
-     // puttheZero();
     
     }
-row1.value= calculation;  
+    
+
+    
+    let settheparenthesis=row1.value.toString();
+    
+    
+    
+      let arro= settheparenthesis.split(","); // Convert string to array
+    
+        console.log(arro);
+        arro.push("");
+                console.log(arro);
+
+    for(let i=0;i<arro.length-1;i++){
+        
+        
+       arro[i+1]=arro[i];
+    }
+    
+arro[arro.length]=")";
+    console.log(arro);
+    arro[0] = "(";
+settheparenthesis= arro.join("");
  
+ console.log(settheparenthesis);
+    
+    
+    
+rowresult.value= calculation.toLocaleString("en-US", {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 8,
+  });
+rowsign.value="";
+row1.value= "("+row1.value+")";//settheparenthesis;
+
+
+
+            rsultbool=true;
+
+            dynaresbg();
+        
+        
+        //row1.scrollLeft =innerWidth;
+
+//row1.scrollWidth
+
+
+    if(rowresult.value.toString().length>7){
+    
+    rowresult.style.fontSize="3.5rem";
+}  
+
+    
+
+rowresult.className +=" resultAnimation";
+
+
+
+if(rowresult.value.toString().length>9){
+    
+    rowresult.style.fontSize="2.5rem";
+    
+}
+
+if(rowresult.value.toString().length>13){
+    
+    rowresult.style.fontSize="1.5rem";
+    
+}
+
+if(rowresult.value.toString().length>21){
+    
+    rowresult.style.fontSize="0.5rem";
+    
+}
+
+
+
+if(rowresult.value.toString().length<8){rowresult.style.fontSize="4.5rem";}
+
+
+
+
+
+
+console.log(row1.scrollWidth ,"ans the other shit is ",row1.clientWidth);
+
+setTimeout(()=>{
+    rowresult.className ="rowresult";
+    
+}
+    ,500);
 }
     
 });
     
     
 });
+//END OF BUTTON FUNCTIONS......
+
+
+//row1.addEventListener('input', () => {
+//row1.scrollLeft = row1.scrollWidth; });
+
+
+//row1.addEventListener('input', function() { this.scrollLeft = this.scrollWidth; });
+
+
+//row1.addEventListener('focus', () =>. {
+
+//row1.scrollLeft =row1.scrollWidth;
+//});
+
 
 
 
@@ -785,7 +983,7 @@ row1.value= calculation;
    backbutt.style.backgroundRepeat="no-repeat";
    backbutt.style.backgroundPosition = "center";
    
-   cssRoot.style.setProperty("--numShine",`0px 0px 5px magenta,0px 0px 5px black, 0 0 5px white,0 0 16px white`);
+   cssRoot.style.setProperty("--numShine",`0px 0px 5px black,0px 0px 5px black, 0 0 5px white,0 0 16px white`);
     
    
    cssRoot.style.setProperty("--backImg",`url("images/matrix.gif")`);
@@ -825,10 +1023,22 @@ row1.value= calculation;
     setInitalStyles();
     
     
+ function   dynaresbg(){
     
+    let backcolor=getComputedStyle(cssRoot).getPropertyValue("--bordCol");
+
+
+let backresult=`linear-gradient(to right, ${backcolor},transparent,transparent`;
+
+
+cssRoot.style.setProperty("--backResult",backresult);
+    
+    
+    
+    }
     
     selectTheme.addEventListener("change",(e)=>{
-        
+
         
         
       if(e.target.value==="light"){
@@ -851,7 +1061,13 @@ row1.value= calculation;
           
           
       }
-        
+      if(rsultbool){
+      setTimeout(()=>{
+          
+          dynaresbg();
+      }
+          ,100);
+      }      
     });
         </script>
     
