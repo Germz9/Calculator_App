@@ -59,7 +59,7 @@
 
 @font-face {
     font-family:'row1Font';
-    src: url('fonts/neon-pixel-7.regular.ttf');
+    src: url('fonts/AlveraDEMO-RegularSquare.ttf');
 
 }
 
@@ -206,6 +206,14 @@ border: solid 0.1px var(--bordCol);
 
 
 
+}
+
+.backbutt{
+    
+    
+    
+    
+    background: var(--buttBack);
 }
 .butt:active{
     
@@ -360,8 +368,8 @@ width: calc(12.5% - 5px); /* make 5 buttons fit */}
 //    white-space: nowrap;
 //    overflow-x: auto;
 
- direction:rtl;
- text-align: right;
+// direction:ltr;
+ //text-align: left;
 
 
   
@@ -388,4 +396,132 @@ width: calc(12.5% - 5px); /* make 5 buttons fit */}
         transform: scale(1);
         
     }
+}
+
+.synDialog{
+    
+    display:none;
+    position: absolute;
+    left:50%;
+    top: 50%;
+    width: 90%;
+    height: 85%;
+    border: solid var(--bordCol) 2px;
+  //  display: flex;
+ //   flex-direction: column;
+  //  justify-content: center;
+  //  align-items: center;
+    transform: translate(-50%,-50%) scale(0);
+  padding-bottom:10px;//30px 0px 30px 0px;
+  //  background: linear-gradient(to top, var(--bordCol),transparent,transparent);
+      z-index: 150;
+     
+    animation:synPopup 0.2s forwards linear;
+}
+
+
+@keyframes synPopup {
+    
+    
+    100%{
+        
+        transform:translate(-50%,-50%)  scale(1);
+    }
+    
+}
+.synDialogNav{
+    
+        
+    position: absolute;
+    left:0%;
+    top: 0%;
+    width: 100%;
+    height: 30px;
+    border: solid var(--bordCol) 1px;
+  //  display: flex;
+ //   justify-content: right;
+//    align-items: center;
+    
+    background:var(--bordCol);
+    border: solid black 0.5px ;
+    
+}
+.exitx{
+    position: absolute;
+    height: 100%;
+    width: 30px;
+    right: 0px;
+    top: -3rem;
+    background: var(--buttCBack);
+    color: var(--buttCcolor);
+    font-size: 3rem;
+    display: flex;
+  justify-content: right;
+ align-items: center;
+ border: solid black;.
+}
+
+
+.syncontentContainer{
+     position: absolute;
+     top:30px;
+     left: 0px;
+    
+    height: calc(100% - 30px);
+    width: 100%;
+    
+    background: transparent;
+
+
+    display: flex;
+    flex-direction: column;
+  justify-content: center;
+ align-items: space-between;
+ border: solid black;.
+    
+    
+    
+    
+}
+.blackShadow{
+    display: none;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    
+    background: black;
+    z-index: 100;
+    opacity: 0.7;
+    
+}
+
+
+.syntext{
+    
+    
+    font-size: 0.75rem;
+    
+    color: var(--buttColor);
+    font-weight: bold;
+}
+.syninput{
+    
+    background: transparent;
+    border: solid var(--bordCol) 1px;
+    width: 50px;
+    outline: none;
+    color: var(--bordCol);
+    
+}
+.synAccept{
+    
+    border-radius: 15px;
+    border: var(--bordCol);
+    color: var(--buttColor);
+    font-weight: bold;
+    padding: 0px 30px 0px 30px;
+    background: var(--buttBack);
+    border: solid var(--bordCol) 1px;
 }

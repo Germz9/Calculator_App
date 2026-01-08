@@ -50,19 +50,44 @@
     
      <input  type="text"  class="rowresult" readonly/>
 
+        <div class="synDialog">
+            <div class="synDialogNav">
+                <p class="exitx" onclick="closeSyn()">×</p>
+            </div>
+            <div class="syncontentContainer">
+                
+
+            <p class="synMaxNumsText syntext"> # of digits for synthetic dividion</p>
+            
+            <input type="number" class="synMaxNumsInput syninput" />
+                        
+            <p class="synNumDividedText syntext">Number to divide by</p>
+   <input type="number" class="synNumDividedInput syninput" />
+              <br/>
+              
+              <button class="synAccept" type=>Accept</button>
+              
+                          </div>
+        </div>
         
-        
+        <div class="blackShadow">
+            
+        </div>
                 
  </div>
             
     <div class="buttonBox">
 
     
-        <button class="butt">Syn</button> 
-         <button class="butt">f²</button> 
+        <button class="butt syn" value="syn">Syn</button> 
+         <button class="butt rootButt" value="root("></button> 
+         
+         
+         
+         <button class="butt" value="logx">logx</button>  
         <button class="butt" value="%">%</button>
         
-        <button class="butt">f⁴</button>  
+
          <button class="butt degbutt" value="angle_measure">Deg</button> 
          <button class="butt cosbutt" value="cos(">Cos</button> 
          <button class="butt sinbutt" value="sin(">Sin</button>
@@ -71,10 +96,10 @@
          <button class="butt" value="e" >e</button> 
          <button class="butt" value="log(" >log</button> 
          <button class="butt"value="ln(">ln</button>
-         <button class="butt" value="**" >^</button> 
+         <button class="butt powerButt" value="**" ></button> 
          <button class="butt" value="!" >!</button> 
          <button class="butt" value="π" >π</button> 
-         <button class="butt" value="√" >√</button> 
+         <button class="butt" value="sq(" >√</button> 
          <button class="butt" value="(" >(</button>
          <button class="butt" value=")" >)</button>
 
@@ -270,6 +295,25 @@ const   rowresult =document.querySelector(".rowresult");
 const   butt =document.querySelectorAll(".butt");
 
 
+let   rootButt =document.querySelector(".rootButt");
+let   powerButt =document.querySelector(".powerButt");
+
+
+
+let   synDialog =document.querySelector(".synDialog");
+
+let   syn =document.querySelector(".syn");
+
+let   blackShadow =document.querySelector(".blackShadow");
+
+
+
+let maxNumSyn=null;
+let numDivideSyn=null;
+
+
+
+
 
 //LOCAL STORAGE VARIABLES
 
@@ -414,7 +458,7 @@ butt.forEach((button,index)=>{
     
     button.addEventListener("click",(el)=>{
         
-        row1.scrollWidth = row1.scrollWidth /2;
+       row1.scrollLeft = row1.scrollWidth ;
         console.log("venga ",row1.scrollLeft  );
  //  row1.scrollLeft =innerWidth;
 
@@ -436,7 +480,7 @@ if(row1.value ==="0") {
 
  row1.value=""; }
     
-if(el.target.value !="<|" && el.target.value !="=" && el.target.value !="angle_measure" && el.target.value != inv && el.target.value !="c"){
+if(el.target.value !="<|" && el.target.value !="=" && el.target.value !="angle_measure" && el.target.value != inv && el.target.value !="c" && el.target.value != "syn"){
 
 
 
@@ -448,6 +492,14 @@ if(el.target.value !="<|" && el.target.value !="=" && el.target.value !="angle_m
 
 }
 
+
+
+if(el.target.value ==="syn"){
+    
+    openSynDialog();
+    
+    
+}
 
 
 if(el.target.value==="/" || el.target.value==="+"|| el.target.value==="-" || el.target.value==="*" || el.target.value==="%" ){
@@ -626,6 +678,7 @@ if(el.target.value==="c"){
     rowsign.value="";
     rowresult.value="";
     rsultbool=false;
+    closeSynDialog();
    cssRoot.style.setProperty("--backResult","transparent");
 } 
 
@@ -660,12 +713,13 @@ function tan(ang){
 function cos(ang){
     
     if(localStorage.getItem("angle_measure")==="degrees"){
-             
+             ang= ang*(Math.PI/180);
         
         return Math.cos(ang);
     }
     
-    ang= ang*(180/Math.PI);
+    
+    return Math.cos(ang);
 }
 function sec(ang){
     
@@ -711,6 +765,27 @@ function ln(x){
     
     return Math.log(x);
 }
+
+function sq(x){
+    if(x===-1){
+        return "i";
+    }
+    if(x<-1){
+        
+        return `${x*(-1)}i`;
+    }
+    
+    return Math.sqrt(x);
+}
+
+
+
+function root(num,index){
+    
+    
+    return num ** (1/index);
+}
+
 
 
 const e=Math.E;
@@ -778,7 +853,7 @@ row1.value= "("+row1.value+")";//settheparenthesis;
 //row1.scrollWidth
 
 
-    if(rowresult.value.toString().length>7){
+    if(rowresult.value.toString().length>13){
     
     rowresult.style.fontSize="3.5rem";
 }  
@@ -789,19 +864,19 @@ rowresult.className +=" resultAnimation";
 
 
 
-if(rowresult.value.toString().length>9){
+if(rowresult.value.toString().length>17){
     
     rowresult.style.fontSize="2.5rem";
     
 }
 
-if(rowresult.value.toString().length>13){
+if(rowresult.value.toString().length>8813){
     
     rowresult.style.fontSize="1.5rem";
     
 }
 
-if(rowresult.value.toString().length>21){
+if(rowresult.value.toString().length>2991){
     
     rowresult.style.fontSize="0.5rem";
     
@@ -860,9 +935,29 @@ setTimeout(()=>{
    //  localStorage.setItem("colortheme_calculator","light");
                 
          
-    function setInitalStyles(){     
+    function setInitalStyles(){    
+        
+        
+        const rootSize=180;
+        
+        
+        
+        rootButt.style.backgroundSize=rootSize+"px";
+   rootButt.style.backgroundRepeat="no-repeat";
+   rootButt.style.backgroundPosition = "center 62%";
+     
+        
+        powerButt.style.backgroundSize="250%";
+  powerButt.style.backgroundRepeat="no-repeat";
+   powerButt.style.backgroundPosition = "center";
+        
+        
          if(localStorage.getItem("colortheme_calculator")==="light")   {
              
+             
+             
+      cssRoot.style.setProperty("--buttBack","linear-gradient(to bottom, lightblue,#FFFFFF,#FFFFFF)");
+  
      cssRoot.style.setProperty("--backImg",`white`);
    backbutt.style.backgroundImage=`url("images/deleteblack.png")`;
    backbutt.style.backgroundSize="45px";
@@ -871,9 +966,23 @@ setTimeout(()=>{
    
    
    
+    rootButt.style.backgroundImage=`url("images/rootBlack.png"),${getComputedStyle(cssRoot).getPropertyValue("--buttBack")}`;
    
+   powerButt.style.backgroundImage=`url("images/powerBlack.png"), ${getComputedStyle(cssRoot).getPropertyValue("--buttBack")}`;
         
      backbutt2.style.backgroundImage=`url("images/deleteblack.png")`;
+     
+     
+ 
+     
+     
+     
+     
+          
+     
+     
+     
+     
      
      
      backbutt2.style.backgroundSize="45px";
@@ -886,7 +995,6 @@ setTimeout(()=>{
   
    
    
-  cssRoot.style.setProperty("--buttBack","linear-gradient(to bottom, lightblue,#FFFFFF,#FFFFFF)");
   
   
   cssRoot.style.setProperty("--bordCol","lightblue");
@@ -920,13 +1028,29 @@ setTimeout(()=>{
              
              
              
-             
+cssRoot.style.setProperty("--buttBack","linear-gradient(to bottom, #000000,#000000,lightblue)");
+  
      cssRoot.style.setProperty("--backImg",`black`);
              
      backbutt.style.backgroundImage=`url("images/deletewhite.png")`;
    backbutt.style.backgroundSize="35px";
    backbutt.style.backgroundRepeat="no-repeat";
    backbutt.style.backgroundPosition = "center";
+   
+   
+    rootButt.style.backgroundImage=`url("images/rootWhite.png"),${getComputedStyle(cssRoot).getPropertyValue("--buttBack")}`;
+      
+   powerButt.style.backgroundImage=`url("images/powerWhite.png"),${getComputedStyle(cssRoot).getPropertyValue("--buttBack")}`;
+   
+   
+   
+   
+    
+     
+     
+     
+          
+   
    
    
         
@@ -945,7 +1069,6 @@ setTimeout(()=>{
    cssRoot.style.setProperty("--buttColor","#FFFFFF");
   
    
-  cssRoot.style.setProperty("--buttBack","linear-gradient(to bottom, #000000,#000000,lightblue)");
   
   
   cssRoot.style.setProperty("--bordCol","lightblue");
@@ -968,10 +1091,22 @@ setTimeout(()=>{
          }else if(localStorage.getItem("colortheme_calculator")==="matrix"){
              
              
-     backbutt.style.backgroundImage=`url("images/deletewhite.png")`;
+          cssRoot.style.setProperty("--buttBack","linear-gradient(to bottom,#000000,#000000,limegreen)");
+  
+             
+             
+   
+    rootButt.style.backgroundImage=`url("images/rootGreen.png"),${getComputedStyle(cssRoot).getPropertyValue("--buttBack")}`;
+   
+   
+   powerButt.style.backgroundImage=`url("images/powerGreen.png"),${getComputedStyle(cssRoot).getPropertyValue("--buttBack")}`;
+
+             
+             
+     backbutt.style.backgroundImage=`url("images/deletegreen.png")`;
      
      
-     backbutt2.style.backgroundImage=`url("images/deletewhite.png")`;
+     backbutt2.style.backgroundImage=`url("images/deletegreen.png")`;
      
      
      backbutt2.style.backgroundSize="35px";
@@ -992,8 +1127,7 @@ setTimeout(()=>{
    cssRoot.style.setProperty("--buttColor","limegreen");
   
    
-  cssRoot.style.setProperty("--buttBack","linear-gradient(to bottom,#000000,#000000,limegreen)");
-  
+
   
   cssRoot.style.setProperty("--bordCol","limegreen");
   
@@ -1069,6 +1203,31 @@ cssRoot.style.setProperty("--backResult",backresult);
           ,100);
       }      
     });
+    
+    function closeSyn(){
+        
+        closeSynDialog();
+        
+        
+    }
+    
+    function closeSynDialog(){
+        
+        maxNumSyn=null;
+        numDivideSyn=null;
+        
+        synDialog.style.display="none";
+        blackShadow.style.display="none"
+    }
+    
+    
+   function openSynDialog(){
+        
+        synDialog.style.display="block";
+    blackShadow.style.display="block"
+        
+        
+    }
         </script>
     
     </body>
