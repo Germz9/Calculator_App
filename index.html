@@ -77,14 +77,15 @@
  </div>
             
     <div class="buttonBox">
-
+            <button class="butt" value="logx(">fun1</button> 
+            <button class="butt" value="W(">W</button>           <button class="butt" value="logx(">fun2</button>           <button class="butt" value="logx(">fun3</button>  
     
         <button class="butt syn" value="syn">Syn</button> 
          <button class="butt rootButt" value="root("></button> 
          
          
          
-         <button class="butt" value="logx">logx</button>  
+         <button class="butt" value="logx(">logx</button>  
         <button class="butt" value="%">%</button>
         
 
@@ -688,6 +689,14 @@ function p(base,exp){
     return base**exp;
 }
 
+
+
+
+
+
+
+
+
 //  TRIGONOMETRIC FUNCTIONS
 function tan(ang){
     
@@ -752,7 +761,43 @@ function csc(ang){
 }
 
 
+function W(z){
+    
+    
+    if (z === 0) return 0;
+    if (z < -0.36787944117144232) return NaN;
 
+    // Fast inline initial guess logic
+    let x = (z < 1.0) ? z : Math.log(z) - Math.log(Math.log(z));
+
+    for (let i = 0; i < 8; i++) {
+        let expX = Math.exp(x);
+        let f = x * expX - z;
+        
+        // Fully flattened algebra: no sub-functions, maximum V8 optimization
+        let stepNum = 2 * (x + 1) * f;
+        let stepDen = 2 * (x + 1) * (x + 1) * expX - (x + 2) * f;
+        let delta = stepNum / stepDen;
+        
+        x -= delta;
+
+        // Break early if we hit double-precision limit
+        if (Math.abs(delta) < 1e-15) {
+            return x;
+        }
+    }
+    return x;
+    
+    
+    
+    
+}
+function logx(base,x){
+    
+       return Math.log10(x)/Math.log10(base);
+    
+
+}
 
 function log(x){
     

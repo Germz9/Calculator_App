@@ -164,7 +164,7 @@ nav{
     grid-template-columns: auto auto auto auto;
     grid-gap: 5px;
     
-    height: 50%;
+    height: 55%;
     width: 100%;
     bottom: 0%;
     left: 0px;
@@ -182,7 +182,7 @@ nav{
    gap: 5px;
    
     
-    height: 50%;
+    height: 55%;
     width: 100%;
     bottom: 0%;
     left: 0px;
@@ -280,7 +280,7 @@ width: calc(12.5% - 5px); /* make 5 buttons fit */}
     top: 70px;
     left: 0%;
     width: 100%;
-    height: calc(50% - 70px);
+    height: calc(45% - 70px);
         background-image: var(--backImg);
     
     background-repeat: no-repeat;
@@ -331,7 +331,7 @@ width: calc(12.5% - 5px); /* make 5 buttons fit */}
         
     position: absolute;
     top: 35%;
-    height: 30%;
+    height:cal( 30% + 0px);
     width:99%;
     border: dotted 0.01px var(--buttColor);
     background: var(--backResult);
