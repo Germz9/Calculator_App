@@ -49,6 +49,13 @@
     <input maxlength="1" type="text"  class="rowsign" readonly="true"/>
     
      <input  type="text"  class="rowresult" readonly/>
+     
+<textarea readonly="true" class="opHistory" value="12466788"></textarea>
+     
+     
+     
+         
+     </div>
 
         <div class="synDialog">
             <div class="synDialogNav">
@@ -97,10 +104,10 @@
          <button class="butt" value="e" >e</button> 
          <button class="butt" value="log(" >log</button> 
          <button class="butt"value="ln(">ln</button>
-         <button class="butt powerButt" value="**" ></button> 
+         <button class="butt powerButt" value="^" ></button> 
          <button class="butt" value="!" >!</button> 
          <button class="butt" value="π" >π</button> 
-         <button class="butt" value="sq(" >√</button> 
+         <button class="butt" value="√" >√</button> 
          <button class="butt" value="(" >(</button>
          <button class="butt" value=")" >)</button>
 
@@ -306,6 +313,7 @@ let   synDialog =document.querySelector(".synDialog");
 let   syn =document.querySelector(".syn");
 
 let   blackShadow =document.querySelector(".blackShadow");
+let   opHistory =document.querySelector(".opHistory");
 
 
 
@@ -320,6 +328,23 @@ let numDivideSyn=null;
 
 
 
+if(!localStorage.getItem("opHistory")){
+    
+
+
+  localStorage.setItem("opHistory",0);
+      
+    
+    
+}
+
+opHistory.value= localStorage.getItem("opHistory");
+
+setTimeout(function()
+{
+  
+    opHistory.scrollTop = opHistory.scrollHeight;
+}, 10);
 if(!localStorage.getItem("calcType")){
     
 
@@ -337,13 +362,13 @@ function calcTypeToggle(){
 if(localStorage.getItem("calcType")==="normal_calc"){
     
     
-    calcType.innerText="REG CALC";
+    calcType.innerText="SCIENT CALCULATOR";
     buttonBox2.style.display="grid";
     
         
     buttonBox.style.display="none";
 }else{
-    calcType.innerText="SCI CALC";
+    calcType.innerText="BASIC CALCULATOR";
     
     buttonBox.style.display="grid";
     buttonBox2.style.display="none";
@@ -690,7 +715,11 @@ function p(base,exp){
 }
 
 
-
+if(el.target.value=== "!"){
+    
+    
+    el.target.value.replace(/(\d+)\s*!/g, 'fact($1)');
+}
 
 
 
@@ -831,7 +860,20 @@ function root(num,index){
     return num ** (1/index);
 }
 
-
+function fact(x){
+    let compute =1;
+    
+    for(let i =x;i>=2;i--){
+        
+        compute *=i;
+        
+        
+        
+    }
+    
+    return compute;
+    
+}
 
 const e=Math.E;
 const π=Math.PI;
@@ -840,6 +882,9 @@ if(el.target.value==="="){
     valToCalc="";
     valToCalc= row1.value;
     
+    valToCalc = valToCalc.replace(/(\d+)\s*!/g, 'fact($1)');
+    valToCalc = valToCalc.replace(/√\s*(\d+)/g, 'sq($1)');
+    valToCalc = valToCalc.replace(/(\d+(?:\.\d+)?)\s*\^\s*(\d+(?:\.\d+)?)/g, '($1 ** $2)');
   
     let calculation=eval(valToCalc);
     
@@ -853,38 +898,75 @@ if(el.target.value==="="){
     }
     
 
+   
+   //  let settheparenthesis=row1.value.toString();
     
-    let settheparenthesis=row1.value.toString();
     
+   
+   //   let arro= settheparenthesis.split(","); // Convert string to array
     
-    
-      let arro= settheparenthesis.split(","); // Convert string to array
-    
-        console.log(arro);
-        arro.push("");
-                console.log(arro);
+     //   console.log(arro);
+     //   arro.push("");
+            //    console.log(arro);
 
-    for(let i=0;i<arro.length-1;i++){
+ //   for(let i=0;i<arro.length-1;i++){
         
         
-       arro[i+1]=arro[i];
-    }
+     //  arro[i+1]=arro[i];
+  //  }
     
-arro[arro.length]=")";
-    console.log(arro);
-    arro[0] = "(";
-settheparenthesis= arro.join("");
+//arro[arro.length]=")";
+   // console.log(arro);
+    //arro[0] = "(";
+//settheparenthesis= arro.join("");
  
- console.log(settheparenthesis);
+ //console.log(settheparenthesis);
+ 
+ 
+ 
+ /*function translateMathSyntax(inputStr) {
+  let pipeline = inputStr;
+
+  // 1. Fix implicit multiplication (e.g., "2 log 100" -> "2 * log 100")
+  pipeline = pipeline.replace(/(\d+)\s+([a-zA-Z])/g, '$1 * $2');
+
+  // 2. Wrap math terms and numbers with parentheses and 'Math.' prefix
+  pipeline = pipeline
+    .replace(/log\s+(\d+(?:\.\d+)?)/g, 'Math.log10($1)')
+    .replace(/ln\s+(\d+(?:\.\d+)?)/g, 'Math.log($1)')
+    .replace(/sin\s+(\d+(?:\.\d+)?)/g, 'Math.sin($1)')
+    .replace(/cos\s+(\d+(?:\.\d+)?)/g, 'Math.cos($1)')
+    .replace(/tan\s+(\d+(?:\.\d+)?)/g, 'Math.tan($1)')
+    .replace(/root\s+(\d+(?:\.\d+)?)/g, 'Math.sqrt($1)');
+
+  // Return the pure, transformed string string
+  return pipeline;
+}
     
+  let calculationPro = translateMathSyntax(calculation)
+    */
     
-    
-rowresult.value= calculation.toLocaleString("en-US", {
+   let formatCalculation=calculation.toLocaleString("en-US", {
     minimumFractionDigits: 0,
-    maximumFractionDigits: 8,
+    maximumFractionDigits:9,
   });
+    
+rowresult.value= formatCalculation;
 rowsign.value="";
-row1.value= "("+row1.value+")";//settheparenthesis;
+//row1.value= row1.value;//settheparenthesis;
+
+opHistory.value +="\n"+row1.value;
+opHistory.value +="\n"+formatCalculation;
+
+let opHistoryUpdate = localStorage.getItem("opHistory") + "\n"+row1.value+"\n"+formatCalculation;
+
+localStorage.setItem("opHistory",opHistoryUpdate);
+setTimeout(function()
+{
+  //  var textArea = document.getElementById('outputTextResultsArea');
+    opHistory.scrollTop = opHistory.scrollHeight;
+}, 10);
+
 
 
 
@@ -909,27 +991,27 @@ rowresult.className +=" resultAnimation";
 
 
 
-if(rowresult.value.toString().length>17){
+if(rowresult.value.toString().length>8){
+    
+    rowresult.style.fontSize="3.5rem";
+    
+}
+
+if(rowresult.value.toString().length>10){
     
     rowresult.style.fontSize="2.5rem";
     
 }
 
-if(rowresult.value.toString().length>8813){
+if(rowresult.value.toString().length>14){
     
     rowresult.style.fontSize="1.5rem";
     
 }
 
-if(rowresult.value.toString().length>2991){
-    
-    rowresult.style.fontSize="0.5rem";
-    
-}
 
 
-
-if(rowresult.value.toString().length<8){rowresult.style.fontSize="4.5rem";}
+if(rowresult.value.toString().length<7){rowresult.style.fontSize="4.5rem";}
 
 
 
@@ -1042,7 +1124,7 @@ setTimeout(()=>{
    
   
   
-  cssRoot.style.setProperty("--bordCol","lightblue");
+  cssRoot.style.setProperty("--bordCol","dodgerblue");
   
   cssRoot.style.setProperty("--navBack","linear-gradient(to top, lightblue,#FFFFFF)");
   
@@ -1116,7 +1198,7 @@ cssRoot.style.setProperty("--buttBack","linear-gradient(to bottom, #000000,#0000
    
   
   
-  cssRoot.style.setProperty("--bordCol","lightblue");
+  cssRoot.style.setProperty("--bordCol","dodgerblue");
   
   cssRoot.style.setProperty("--navBack","linear-gradient(to bottom, #000000,#000000)");
   
@@ -1174,7 +1256,7 @@ cssRoot.style.setProperty("--buttBack","linear-gradient(to bottom, #000000,#0000
    
 
   
-  cssRoot.style.setProperty("--bordCol","limegreen");
+  cssRoot.style.setProperty("--bordCol","lime");
   
   cssRoot.style.setProperty("--navBack","linear-gradient(to bottom,limegreen,#000000)");
   

@@ -64,6 +64,22 @@
 }
 
 
+@font-face {
+    font-family:'Sekiro';
+    src: url('fonts/AGaramondPro-Regular.otf');
+
+}
+
+@font-face {
+    font-family:'SekiroBold';
+    src: url('fonts/AGaramondPro-Bold.otf');
+
+}
+
+
+
+
+
 
 
 
@@ -94,6 +110,7 @@ nav{
     font-weight: bold;
     background: var(--navBack);
     border: solid 1px var(--bordCol);
+    font-family: Sekiro;
 }
 
 .selectTheme{
@@ -118,10 +135,10 @@ nav{
     
     
     
-        position: absolute;
+       position: absolute;
     left: 1px;
     top: 53px;
-    width: 20%;
+ //   width: 20%;
     color: var(--buttColor);
     background: var(--buttBack);
     font-weight: bold;
@@ -189,14 +206,20 @@ nav{
 }
 
 
+
+
+
+
+
 .butt{
     
     
     font-weight: bold;
 
-border-radius: 19px;
+border-radius: 10px;
 
 font-size: 1.2rem;
+font-family: regularText ;
 
 background: var(--buttBack);
 
@@ -309,12 +332,30 @@ width: calc(12.5% - 5px); /* make 5 buttons fit */}
     
 }
 
+
+
+.opHistory{
+    
+     position: absolute;
+    left: 0;
+    top: 0;
+    background: transparent;
+    width: 100%;
+    height: 20%;
+    opacity: 0.5;
+    outline: none;
+    color: var(--buttColor);
+    border-bottom: 0.5px var(--buttColor);
+    font-family: regularText ;
+
+}
+
 .rowsign{
     
     
     position: absolute;
     right: 0px;
-    top: 22%;
+    top: 40%;
     height: 10%;
     width:30px;
     border: dotted 0.01px var(--buttColor);
@@ -330,7 +371,7 @@ width: calc(12.5% - 5px); /* make 5 buttons fit */}
 .rowresult{
         
     position: absolute;
-    top: 35%;
+    top: 50%;
     height:cal( 30% + 0px);
     width:99%;
     border: dotted 0.01px var(--buttColor);
@@ -338,7 +379,7 @@ width: calc(12.5% - 5px); /* make 5 buttons fit */}
     font-size:4.5rem;
     color: var(--buttColor);
     text-shadow: var(--numShine);
-    font-family: resultFont;
+    font-family: other;
     outline: none;
   //  font-style: italic;
    border: none;
@@ -352,7 +393,7 @@ width: calc(12.5% - 5px); /* make 5 buttons fit */}
     
   //  display: block;
     position: absolute;
-    top: 5px;
+    top: 25%;
     left: 0px;
   //  right: 0;
     width:100%;
@@ -364,7 +405,7 @@ width: calc(12.5% - 5px); /* make 5 buttons fit */}
     outline: none;
     border: none;
     text-shadow: var(--numShine);
-    font-family: row1Font;
+    font-family: regularText;
 //    white-space: nowrap;
 //    overflow-x: auto;
 
