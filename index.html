@@ -120,7 +120,7 @@
          <button value="4"  class="butt">4</button> 
          <button class="butt" value="5" >5</button> 
          <button class="butt" value="6">6</button> 
-         <button class="butt" value="*" >×</button> 
+         <button class="butt" value="×" >×</button> 
          <button class="butt" value="7" >7</button> 
          <button class="butt" value="8" >8</button> 
          <button class="butt" value="9" >9</button>
@@ -885,6 +885,10 @@ if(el.target.value==="="){
     valToCalc = valToCalc.replace(/(\d+)\s*!/g, 'fact($1)');
     valToCalc = valToCalc.replace(/√\s*(\d+)/g, 'sq($1)');
     valToCalc = valToCalc.replace(/(\d+(?:\.\d+)?)\s*\^\s*(\d+(?:\.\d+)?)/g, '($1 ** $2)');
+    
+    
+valToCalc = valToCalc.replace(/×/g, '*');
+
   
     let calculation=eval(valToCalc);
     
