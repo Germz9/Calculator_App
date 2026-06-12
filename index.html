@@ -97,13 +97,13 @@
         
 
          <button class="butt degbutt" value="angle_measure">Deg</button> 
-         <button class="butt cosbutt" value="cos(">Cos</button> 
-         <button class="butt sinbutt" value="sin(">Sin</button>
-         <button class="butt tanbutt" value="tan(" >Tan</button>
+         <button class="butt cosbutt" value="cos">Cos</button> 
+         <button class="butt sinbutt" value="sin">Sin</button>
+         <button class="butt tanbutt" value="tan" >Tan</button>
          <button class="butt invbutt" value="inv">Inv</button> 
          <button class="butt" value="e" >e</button> 
-         <button class="butt" value="log(" >log</button> 
-         <button class="butt"value="ln(">ln</button>
+         <button class="butt" value="log" >log</button> 
+         <button class="butt"value="ln">ln</button>
          <button class="butt powerButt" value="^" ></button> 
          <button class="butt" value="!" >!</button> 
          <button class="butt" value="π" >π</button> 
@@ -875,8 +875,8 @@ function fact(x){
     
 }
 
-const e=Math.E;
-const π=Math.PI;
+//const e=Math.E;
+//const π=Math.PI;
 
 if(el.target.value==="="){
     valToCalc="";
@@ -884,10 +884,23 @@ if(el.target.value==="="){
     
     valToCalc = valToCalc.replace(/(\d+)\s*!/g, 'fact($1)');
     valToCalc = valToCalc.replace(/√\s*(\d+)/g, 'sq($1)');
-    valToCalc = valToCalc.replace(/(\d+(?:\.\d+)?)\s*\^\s*(\d+(?:\.\d+)?)/g, '($1 ** $2)');
+    valToCalc = valToCalc.replace(/(\d+(?:\.\d+)?)\s*\^\s*(\d+(?:\.\d+)?)/g, '(($1) ×× ($2))');
     
     
 valToCalc = valToCalc.replace(/×/g, '*');
+valToCalc = valToCalc.replace(/e/g, '2.71828182845904523536028747135266249775724709369995');
+
+valToCalc = valToCalc.replace(/π/g, '3.14159265358979323846264338327950288419716939937510');
+
+valToCalc = valToCalc.replace(/sin\s*(\d+(?:\.\d+)?)/g, 'sin($1)');
+valToCalc = valToCalc.replace(/cos\s*(\d+(?:\.\d+)?)/g, 'cos($1)');
+valToCalc = valToCalc.replace(/tan\s*(\d+(?:\.\d+)?)/g, 'tan($1)');
+
+valToCalc = valToCalc.replace(/log\s*(\d+(?:\.\d+)?)/g, 'log($1)');
+valToCalc = valToCalc.replace(/ln\s*(\d+(?:\.\d+)?)/g, 'ln($1)');
+
+//valToCalc = valToCalc.replace(/lne\s*(\d+(?:\.\d+)?)/g, 'ln(Math.E)');
+
 
   
     let calculation=eval(valToCalc);
@@ -959,10 +972,10 @@ rowresult.value= formatCalculation;
 rowsign.value="";
 //row1.value= row1.value;//settheparenthesis;
 
-opHistory.value +="\n"+row1.value;
 opHistory.value +="\n"+formatCalculation;
+opHistory.value +="\n"+row1.value;
 
-let opHistoryUpdate = localStorage.getItem("opHistory") + "\n"+row1.value+"\n"+formatCalculation;
+let opHistoryUpdate = localStorage.getItem("opHistory") +formatCalculation + "\n"+row1.value+"\n";
 
 localStorage.setItem("opHistory",opHistoryUpdate);
 setTimeout(function()

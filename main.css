@@ -347,6 +347,7 @@ width: calc(12.5% - 5px); /* make 5 buttons fit */}
     color: var(--buttColor);
     border-bottom: 0.5px var(--buttColor);
     font-family: regularText ;
+    font-size: 1rem;
 
 }
 
