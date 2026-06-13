@@ -85,7 +85,7 @@
             
     <div class="buttonBox">
             <button class="butt" value="logx(">fun1</button> 
-            <button class="butt" value="W(">W</button>           <button class="butt" value="logx(">fun2</button>           <button class="butt" value="logx(">fun3</button>  
+            <button class="butt" value="W">W</button>           <button class="butt" value="logx(">fun2</button>           <button class="butt" value="logx(">fun3</button>  
     
         <button class="butt syn" value="syn">Syn</button> 
          <button class="butt rootButt" value="root("></button> 
@@ -884,22 +884,35 @@ if(el.target.value==="="){
     valToCalc="";
     valToCalc= row1.value;
     
-    valToCalc = valToCalc.replace(/(\d+)\s*!/g, 'fact($1)');
-    valToCalc = valToCalc.replace(/√\s*(\d+)/g, 'sq($1)');
-    valToCalc = valToCalc.replace(/(\d+(?:\.\d+)?)\s*\^\s*(\d+(?:\.\d+)?)/g, '(($1) ×× ($2))');
-    
-    
+// 1. Visual Cross to JavaScript Asterisk
 valToCalc = valToCalc.replace(/×/g, '*');
+
+// 2. THE ULTIMATE EXPONENT INTERCEPTOR (Kept clean and solitary)
+valToCalc = valToCalc.replace(/([a-zA-Z0-9.π\x7F-\xFF]+(?:\([^)]+\))?|\([^)]+\))\s*\^\s*([a-zA-Z0-9.π\x7F-\xFF]+|\([^)]+\))/g, '($1 ** $2)');
+
+// 3. Your Custom Math Operators
+valToCalc = valToCalc.replace(/(\d+)\s*!/g, 'fact($1)');
+valToCalc = valToCalc.replace(/√\s*(\d+)/g, 'sq($1)');
+
+// 4. Hardcoded High-Precision Transcendental Constants
 valToCalc = valToCalc.replace(/e/g, '2.71828182845904523536028747135266249775724709369995');
+valToCalc = valToCalc.replace(/π/g, '3.14159265358979323');
 
-valToCalc = valToCalc.replace(/π/g, '3.14159265358979323846264338327950288419716939937510');
-
+// 5. Parentheses-less Function Wrappers
 valToCalc = valToCalc.replace(/sin\s*(\d+(?:\.\d+)?)/g, 'sin($1)');
 valToCalc = valToCalc.replace(/cos\s*(\d+(?:\.\d+)?)/g, 'cos($1)');
 valToCalc = valToCalc.replace(/tan\s*(\d+(?:\.\d+)?)/g, 'tan($1)');
-
 valToCalc = valToCalc.replace(/log\s*(\d+(?:\.\d+)?)/g, 'log($1)');
 valToCalc = valToCalc.replace(/ln\s*(\d+(?:\.\d+)?)/g, 'ln($1)');
+
+valToCalc = valToCalc.replace(/W\s*(\w+(?:\.\w+)?)/g, 'W($1)');
+
+
+//valToCalc = valToCalc.replace(/W\s*(\w+(?:\+)/g, 'W($1)');
+
+
+
+
 
 //valToCalc = valToCalc.replace(/lne\s*(\d+(?:\.\d+)?)/g, 'ln(Math.E)');
 
