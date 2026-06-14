@@ -481,12 +481,12 @@ width: calc(12.5% - 5px); /* make 5 buttons fit */}
 .synDialogNav{
     
         
-    position: absolute;
+    position: relative;
     left:0%;
     top: 0%;
     width: 100%;
     height: 35px;
-    border: solid var(--bordCol) 1px;
+    border:solid var(--bordCol) 1px;
   //  display: flex;
  //   justify-content: right;
 //    align-items: center;
@@ -499,8 +499,8 @@ width: calc(12.5% - 5px); /* make 5 buttons fit */}
     position: absolute;
     height:30px ;
     width: 30px;
-    right: 0px;
-    top: -3rem;
+    right:0%;
+    top: -50px;
     background: var(--buttCBack);
     color: var(--buttCcolor);
     font-size: 3rem;
@@ -510,6 +510,17 @@ width: calc(12.5% - 5px); /* make 5 buttons fit */}
  border: solid black;.
 }
 
+.syntheticdivision{
+    
+    position: absolute;
+    left: 50%;
+    top: 0%;
+    transform: translate(-50%,-60%) scale(1.5);
+    font-family: var(--buttFont);
+    color: black;
+    font-weight: bold;
+    
+}
 
 .syncontentContainer{
      position: absolute;
@@ -609,7 +620,7 @@ width: calc(12.5% - 5px); /* make 5 buttons fit */}
     outline: none;
     color: var(--bordCol);
     font-family: regularText;
-    font-size: 1.5rem;
+    font-size: 2.5rem;
     z-index: 150;
 }
 
@@ -649,6 +660,7 @@ width: calc(12.5% - 5px); /* make 5 buttons fit */}
     width: 100%;
     height:40% ;
   //  border:solid white;
+ 
     
     
     
@@ -660,6 +672,10 @@ width: calc(12.5% - 5px); /* make 5 buttons fit */}
    
     
 }
+
+
+
+
 
 .buttsyn{
         font-weight: bold;
@@ -673,11 +689,22 @@ background: var(--buttBack);
 
 color: var(--buttColor);
 
-border: solid 0.1px var(--bordCol);
+border: solid 1.5px var(--bordCol);
 width:100%
 
     
     
+}
+
+
+.buttsyn:active{
+    
+    
+    
+//transform: scale(0.5) ;
+  
+    
+  box-shadow: 0 0 10px 1px var(--buttColor), 0 0 10px 1px var(--buttColor), 0 0 10px 1px var(--buttColor), 0 0 10px 1px var(--buttColor), 0 0 15px 1px var(--buttColor);
 }
 
 .deletesyn{

@@ -60,6 +60,8 @@
         <div class="synDialog">
             <div class="synDialogNav">
                 <p class="exitx" onclick="closeSyn()">×</p>
+                
+                <h5 class="syntheticdivision">Synthetic Division</h5>
             </div>
             
             
@@ -104,7 +106,7 @@
    
               <br/>
               
-              <button class="synAccept" type=>FINISH</button>
+              <button class="synAccept" type=>OPERATE</button>
               
               
               
@@ -225,7 +227,7 @@
          <button value="4"  class="butt">4</button> 
          <button class="butt" value="5" >5</button> 
          <button class="butt" value="6">6</button> 
-         <button class="butt" value="*" >×</button> 
+         <button class="butt" value="×" >×</button> 
          <button class="butt" value="7" >7</button> 
          <button class="butt" value="8" >8</button> 
          <button class="butt" value="9" >9</button>
@@ -620,12 +622,16 @@ synkeyboard.forEach((button,index)=>{
             
             if(!operationFinished){
             coefficients.value +="  ";
-            setTimeout(()=>{butt.target.style.visibility="hidden"; },100);
-            
+            setTimeout(()=>{butt.target.style.visibility="hidden";
+        
+        
+                
+            },100);
+             
             
             }else{
                 
-                
+                nextnumber.disabled= false;
                 blackShadow2.style.display="none";
     butt.target.innerText="Next Number";
     
@@ -644,7 +650,8 @@ synkeyboard.forEach((button,index)=>{
                 
             }else if(coefficients.value.charAt(coefficients.value.length - 1) === " "){
                 
-                alert("yes it works nigga cah yiubare blacl,BLACK MEN");
+                
+                
                 coefficients.value=coefficients.value.slice(0,coefficients.value.length -3);
                 
                 
@@ -686,7 +693,7 @@ let deletesyn = document.querySelector(".deletesyn");
                 
             }else if(coefficients.value.charAt(coefficients.value.length - 1) === " "){
                 
-                alert("yes it works nigga cah yiubare blacl,BLACK MEN");
+                
                 coefficients.value=coefficients.value.slice(0,coefficients.value.length -3);
                 
                 
@@ -744,6 +751,7 @@ synAccept.addEventListener("click",()=>{
     nextnumber.innerText="Next Division"
     nextnumber.style.display="block";
     nextnumber.style.visibility="visible";
+    nextnumber.disabled = false;
     
    syncresult.value="";
    
@@ -1225,7 +1233,7 @@ function sq(x){
 
 
 
-function root(num,index){
+function root(index,num){
     
     
     return num ** (1/index);
@@ -1806,6 +1814,8 @@ cssRoot.style.setProperty("--backResult",backresult);
         coefficients.value="";
         resultArr.length =0;
         divisor.value=0;
+        row1.value="0";
+        
     }
     
     
