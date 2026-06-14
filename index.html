@@ -61,21 +61,86 @@
             <div class="synDialogNav">
                 <p class="exitx" onclick="closeSyn()">×</p>
             </div>
-            <div class="syncontentContainer">
-                
-
-            <p class="synMaxNumsText syntext"> # of digits for synthetic dividion</p>
             
-            <input type="number" class="synMaxNumsInput syninput" />
-                        
-            <p class="synNumDividedText syntext">Number to divide by</p>
-   <input type="number" class="synNumDividedInput syninput" />
+            
+                    <div class="blackShadow2">
+            
+        </div>
+            <div class="syncontentContainer">
+                              
+
+                
+                   <br />
+                   
+                   
+                   
+
+       
+       
+       
+       <input type="text" class="coefficients syninput" readonly="true" value="" />
+
+            <p class="synMaxNumsText syntext"style="display:none"> # of digits for synthetic dividion</p>
+            
+
+ <div class="" style="height:10%;"></div>  
+ 
+                
+                    
+             
+                    
+     <input type="text" class="syncresult syninput" readonly="true" value="" />          
+
+            <p class="synNumDividedText syntext" style="display:none;">Number to divide by</p>
+            
+            
+                          <br/>
+            
+
+   
+   
+   <input type="text" class="divisor" readonly="true"/>
+   
+   
               <br/>
               
-              <button class="synAccept" type=>Accept</button>
+              <button class="synAccept" type=>FINISH</button>
               
+              
+              
+              <br />
+              
+              
+              <div class="synkeyboard">
+                  
+                  
+                  
+       <button class="buttsyn" value="1">1</button> 
+         <button class="buttsyn" value="2">2</button> 
+         <button value="3" class="buttsyn">3</button> 
+         
+         <button value="4"  class="buttsyn">4</button> 
+         <button class="buttsyn" value="5" >5</button> 
+         <button class="buttsyn" value="6">6</button> 
+         
+         <button class="buttsyn" value="7" >7</button> 
+         <button class="buttsyn" value="8" >8</button> 
+         <button class="buttsyn" value="9" >9</button>
+
+  <button class="buttsyn" value="0" >0</button>
+       <button class="buttsyn" value="-" >-</button> 
+     
+
+ 
+      <button class="buttsyn deletesyn" value="delete" ></button> 
+
+   <button class="buttsyn nextnumber" value="nextnumber" >Next Number</button> 
+   
+
+              </div>
                           </div>
         </div>
+                
         
         <div class="blackShadow">
             
@@ -313,7 +378,42 @@ let   synDialog =document.querySelector(".synDialog");
 let   syn =document.querySelector(".syn");
 
 let   blackShadow =document.querySelector(".blackShadow");
+let   blackShadow2 =document.querySelector(".blackShadow2");
+
 let   opHistory =document.querySelector(".opHistory");
+let divisor =document.querySelector(".divisor");
+
+
+let coefficients =document.querySelector(".coefficients");
+
+const synkeyboard =document.querySelectorAll(".synkeyboard");
+let nextnumber = document.querySelector(".nextnumber");
+
+let synAccept = document.querySelector(".synAccept");
+let syncresult = document.querySelector(".syncresult");
+
+
+
+//divisor.innerHTML =`<option>DIVISOR</option>`;
+    
+
+/*for (let i =-50;i<50;i++){
+    
+    
+    divisor.innerHTML +=`<option> ${i}</option>`;
+    
+    if(i===0){
+        
+         divisor.innerHTML +=`<option selected > ${i}</option>`;
+    }
+    
+    
+}
+*/
+divisor.selected=0;
+
+
+
 
 
 
@@ -477,7 +577,276 @@ row1.value ="0";
 //ow1.addEventListener('input', function() { this.scrollLeft = this.scrollWidth; });
 let rsultbool=false;
 
+let operationFinished= false;
+let keyfocuson ="coefficients";
+
 //FUJCTIONS
+coefficients.addEventListener("click",()=>{
+keyfocuson ="coefficients";
+
+
+});
+divisor.addEventListener("click",()=>{
+    keyfocuson ="divisor";
+
+    
+    
+});
+synkeyboard.forEach((button,index)=>{
+    
+ //   let coefficientArr=["a","b","c"];
+   
+    
+    button.addEventListener("click",(butt)=>{
+        
+        navigator.vibrate(50);
+        
+        
+        if(butt.target.value !="nextnumber" && butt.target.value != "delete"){
+            
+            if(keyfocuson==="coefficients"){
+        coefficients.value +=butt.target.value;
+        
+        setTimeout(()=>{document.querySelector(".nextnumber").style.visibility="visible"; },100);
+                
+            }else if( keyfocuson ==="divisor"){
+            
+            
+            divisor.value += butt.target.value;
+        
+            }
+        } 
+        else if(butt.target.value==="nextnumber"){
+            
+            if(!operationFinished){
+            coefficients.value +="  ";
+            setTimeout(()=>{butt.target.style.visibility="hidden"; },100);
+            
+            
+            }else{
+                
+                
+                blackShadow2.style.display="none";
+    butt.target.innerText="Next Number";
+    
+    
+    coefficients.value="";
+    operationFinished=false;
+            }
+        }else if(butt.target.value==="delete"){
+            
+            
+            
+            
+            if(coefficients.value.length -1 !=""){
+                
+                coefficients.value=coefficients.value.slice(0,coefficients.value.length -1);
+                
+            }else if(coefficients.value.charAt(coefficients.value.length - 1) === " "){
+                
+                alert("yes it works nigga cah yiubare blacl,BLACK MEN");
+                coefficients.value=coefficients.value.slice(0,coefficients.value.length -3);
+                
+                
+            }
+            
+            
+            
+        }
+     //   console.log(coefficients.value);
+        
+        
+        
+        
+        
+    });
+    
+    
+    
+    
+});
+
+
+
+//alert("just cinnecting suck my dick nihga bitchhh");
+let deletesyn = document.querySelector(".deletesyn");
+
+ 
+        deletesyn.addEventListener("click",()=>{
+            
+            
+            if(keyfocuson==="coefficients"){
+            
+            
+        
+            
+            if(coefficients.value.length -1 !=""  || coefficients.value.length ===1){
+                
+                coefficients.value=coefficients.value.slice(0,coefficients.value.length -1);
+                
+            }else if(coefficients.value.charAt(coefficients.value.length - 1) === " "){
+                
+                alert("yes it works nigga cah yiubare blacl,BLACK MEN");
+                coefficients.value=coefficients.value.slice(0,coefficients.value.length -3);
+                
+                
+            }
+            }else if(keyfocuson==="divisor"){
+                
+                
+             divisor.value= divisor.value.slice(0,divisor.value.length-1);   
+                
+            }
+            
+        });
+
+
+
+let resultArr =[];
+
+
+
+
+
+
+
+function ruffini(mydivisor,num,index){
+     
+    let newnum=0;
+    
+    if(index===0){
+                  resultArr.push(num);
+    }
+    
+    if(index >0){
+        
+        
+         newnum=(mydivisor* resultArr[resultArr.length -1]) + num;
+        
+        
+    
+        resultArr.push(newnum);
+        
+    }
+    
+    console.log(newnum,typeof newnum," suck mai dieck");
+    
+    
+}
+
+
+
+synAccept.addEventListener("click",()=>{
+    
+    console.log([coefficients.value] ,"and now ",[coefficients.value.trim()]);
+    
+    blackShadow2.style.display="block";
+    nextnumber.innerText="Next Division"
+    nextnumber.style.display="block";
+    nextnumber.style.visibility="visible";
+    
+   syncresult.value="";
+   
+   coefficients.value = coefficients.value.trim();
+          let  coefficientArr= coefficients.value.split("  ");
+          
+
+          let  coefficientArrNum=[];
+          
+          
+          coefficientArr.forEach((num,index)=>{
+              coefficientArrNum.push(parseInt(num));
+              
+          });  
+            
+       // console.log(coefficientArr);
+        console.log(coefficientArrNum);
+        
+        
+        coefficientArrNum.forEach((num,index)=>{
+            
+            
+            if(typeof num != isNaN()){
+ruffini(parseInt(divisor.value),num,index);
+            }
+              
+          });  
+        
+      //  resultArr.pop();
+
+        
+        resultArr.forEach((i,index)=>{
+            
+            
+           console.log(i," , " ,typeof i," lefa") ;
+           
+           if(index === 0){
+               syncresult.value += i;
+           }else{
+           
+           
+           syncresult.value +="  " + i;
+           }
+        }
+        );
+        
+  console.log(divisor.value,typeof divisor.value," my divisor");
+      
+console.log(resultArr," my fucking synthetic division result wguch is by now fucking wrong for syre !!! ");
+
+
+setTimeout(()=>{
+    resultArr.length =0;
+    operationFinished=true;
+    
+    
+},50);
+
+
+//setTimeout(()=>{nextsynoperation();},50);
+
+        });
+    
+
+
+
+
+
+function nextsynoperation(){
+    
+    
+    
+    synkeyboard.forEach((i,ind)=>{
+    if(i.target.value !="nextnumber"){
+        
+        
+    i.target.style.display="none"; 
+    }else{
+        
+        i.target.value="NEXT OPERATION";
+        
+        
+        i.target.addEventListener("click",()=>{
+            coefficients.value="";
+            
+          synkeyboard.forEach((el,index)=>{
+              
+              el.target.style.display="block";
+              if(el.target.value==="nextnumber"){
+                  i.target.value="NEXT NUMBER";
+              }
+          })  
+            
+            
+            
+        })
+    }
+});
+            
+}
+
+
+
 
 butt.forEach((button,index)=>{
     
@@ -1118,10 +1487,16 @@ setTimeout(()=>{
       cssRoot.style.setProperty("--buttBack","linear-gradient(to bottom, lightblue,#FFFFFF,#FFFFFF)");
   
      cssRoot.style.setProperty("--backImg",`white`);
+     
    backbutt.style.backgroundImage=`url("images/deleteblack.png")`;
+   
+   
+   cssRoot.style.setProperty("--deletebuttmIMG","url(images/deletewhite.png");
+   
    backbutt.style.backgroundSize="45px";
    backbutt.style.backgroundRepeat="no-repeat";
    backbutt.style.backgroundPosition = "center";
+   
    
    
    
@@ -1154,11 +1529,21 @@ setTimeout(()=>{
   
    
    
-  
+  cssRoot.style.setProperty("--buttFont","regularText");
   
   cssRoot.style.setProperty("--bordCol","dodgerblue");
   
   cssRoot.style.setProperty("--navBack","linear-gradient(to top, lightblue,#FFFFFF)");
+  
+  
+  cssRoot.style.setProperty("--buttbackdropfilter","#000000");
+  
+  cssRoot.style.setProperty("--buttShadow","#000000");
+  
+  cssRoot.style.setProperty("--buttTransition","#000000");
+  
+  
+  
   
    
    cssRoot.style.setProperty("--solgokzCol","#000000");
@@ -1192,6 +1577,11 @@ cssRoot.style.setProperty("--buttBack","linear-gradient(to bottom, #000000,#0000
      cssRoot.style.setProperty("--backImg",`black`);
              
      backbutt.style.backgroundImage=`url("images/deletewhite.png")`;
+     
+     
+     cssRoot.style.setProperty("--deletebuttmIMG","url(images/deleteblack.png");
+     
+     
    backbutt.style.backgroundSize="35px";
    backbutt.style.backgroundRepeat="no-repeat";
    backbutt.style.backgroundPosition = "center";
@@ -1220,12 +1610,33 @@ cssRoot.style.setProperty("--buttBack","linear-gradient(to bottom, #000000,#0000
    backbutt2.style.backgroundRepeat="no-repeat";
    backbutt2.style.backgroundPosition = "center";
    
+   
+   
+     
+  cssRoot.style.setProperty("--buttbackdropfilter","blur(6px)");
+  
+  cssRoot.style.setProperty("--buttShadow","0 0 0 0");
+  
+  cssRoot.style.setProperty("--buttTransition","all 0.2s ease");
+   
+   
+
+   
+     
+   
+   
+   
+   
+   
+   
    cssRoot.style.setProperty("--numShine",`0px 0px 0px transparent`);
     
-   
+cssRoot.style.setProperty("--buttFont","regularText");
    
    
    cssRoot.style.setProperty("--buttColor","#FFFFFF");
+  
+  
   
    
   
@@ -1250,9 +1661,10 @@ cssRoot.style.setProperty("--buttBack","linear-gradient(to bottom, #000000,#0000
          }else if(localStorage.getItem("colortheme_calculator")==="matrix"){
              
              
-          cssRoot.style.setProperty("--buttBack","linear-gradient(to bottom,#000000,#000000,limegreen)");
+       //   cssRoot.style.setProperty("--buttBack","linear-gradient(to bottom,#000000,#000000,limegreen)");
   
              
+             cssRoot.style.setProperty("--buttBack","linear-gradient(to bottom, rgba(0, 77, 26, 0.6), rgba(0, 0, 0, 0.7))");
              
    
     rootButt.style.backgroundImage=`url("images/rootGreen.png"),${getComputedStyle(cssRoot).getPropertyValue("--buttBack")}`;
@@ -1264,6 +1676,8 @@ cssRoot.style.setProperty("--buttBack","linear-gradient(to bottom, #000000,#0000
              
      backbutt.style.backgroundImage=`url("images/deletegreen.png")`;
      
+     
+     cssRoot.style.setProperty("--deletebuttmIMG","url('images/deletewhite.png'");
      
      backbutt2.style.backgroundImage=`url("images/deletegreen.png")`;
      
@@ -1277,6 +1691,17 @@ cssRoot.style.setProperty("--buttBack","linear-gradient(to bottom, #000000,#0000
    backbutt.style.backgroundRepeat="no-repeat";
    backbutt.style.backgroundPosition = "center";
    
+   
+     
+  cssRoot.style.setProperty("--buttbackdropfilter","#000000");
+  
+  cssRoot.style.setProperty("--buttShadow","#000000");
+  
+  cssRoot.style.setProperty("--buttTransition","#000000");
+   
+   
+   
+   
    cssRoot.style.setProperty("--numShine",`0px 0px 5px black,0px 0px 5px black, 0 0 5px white,0 0 16px white`);
     
    
@@ -1286,7 +1711,7 @@ cssRoot.style.setProperty("--buttBack","linear-gradient(to bottom, #000000,#0000
    cssRoot.style.setProperty("--buttColor","limegreen");
   
    
-
+    cssRoot.style.setProperty("--buttFont","Consolas");
   
   cssRoot.style.setProperty("--bordCol","lime");
   
@@ -1376,7 +1801,11 @@ cssRoot.style.setProperty("--backResult",backresult);
         numDivideSyn=null;
         
         synDialog.style.display="none";
-        blackShadow.style.display="none"
+        blackShadow.style.display="none";
+        syncresult.value="";
+        coefficients.value="";
+        resultArr.length =0;
+        divisor.value=0;
     }
     
     

@@ -12,7 +12,7 @@
     --solgokzCol:#000000;
     --buttCBack:linear-gradient(to bottom,#000000,#FFFFFF);
     
-    
+    --buttFont:times;
     --buttCcolor:#FFFFFF;
     --mainBoxBack:#FFFFFF;
     --calcBack:#FFFFFF;
@@ -22,6 +22,10 @@
     --innerWidth:0px;
     --halfinnerWidth:0px;
    --backResult:transparent;
+   --buttTransition:0s;
+   --buttShadow:0 0 0 0 ;
+   --buttbackdropfilter:0;
+   --deletebuttmIMG:url("");
 
 }
 
@@ -216,10 +220,10 @@ nav{
     
     font-weight: bold;
 
-border-radius: 10px;
+border-radius: 6px;
 
 font-size: 1.2rem;
-font-family: regularText ;
+font-family: var(--buttFont) ;
 
 background: var(--buttBack);
 
@@ -227,6 +231,9 @@ color: var(--buttColor);
 
 border: solid 0.1px var(--bordCol);
 
+box-shadow: var(--buttShadow);
+  backdrop-filter: var(--buttbackdropfilter);
+  transition: var(--buttTransition);
 
 
 }
@@ -346,7 +353,7 @@ width: calc(12.5% - 5px); /* make 5 buttons fit */}
     outline: none;
     color: var(--buttColor);
     border-bottom: 0.5px var(--buttColor);
-    font-family: regularText ;
+    font-family: var(--buttFont) ;
     font-size: 1rem;
 
 }
@@ -406,7 +413,7 @@ width: calc(12.5% - 5px); /* make 5 buttons fit */}
     outline: none;
     border: none;
     text-shadow: var(--numShine);
-    font-family: regularText;
+    font-family: var(--buttFont);
 //    white-space: nowrap;
 //    overflow-x: auto;
 
@@ -454,8 +461,8 @@ width: calc(12.5% - 5px); /* make 5 buttons fit */}
   //  justify-content: center;
   //  align-items: center;
     transform: translate(-50%,-50%) scale(0);
-  padding-bottom:10px;//30px 0px 30px 0px;
-  //  background: linear-gradient(to top, var(--bordCol),transparent,transparent);
+ // padding-bottom:10px 30px 0px 30px 0px;
+   background: linear-gradient(to bottom, transparent,var(--buttColor));
       z-index: 150;
      
     animation:synPopup 0.2s forwards linear;
@@ -478,19 +485,19 @@ width: calc(12.5% - 5px); /* make 5 buttons fit */}
     left:0%;
     top: 0%;
     width: 100%;
-    height: 30px;
+    height: 35px;
     border: solid var(--bordCol) 1px;
   //  display: flex;
  //   justify-content: right;
 //    align-items: center;
     
     background:var(--bordCol);
-    border: solid black 0.5px ;
+  //  border: solid black 0.5px ;
     
 }
 .exitx{
     position: absolute;
-    height: 100%;
+    height:30px ;
     width: 30px;
     right: 0px;
     top: -3rem;
@@ -506,11 +513,11 @@ width: calc(12.5% - 5px); /* make 5 buttons fit */}
 
 .syncontentContainer{
      position: absolute;
-     top:30px;
+     top:35px;
      left: 0px;
     
     height: calc(100% - 30px);
-    width: 100%;
+    width: 98%;
     
     background: transparent;
 
@@ -518,8 +525,9 @@ width: calc(12.5% - 5px); /* make 5 buttons fit */}
     display: flex;
     flex-direction: column;
   justify-content: center;
- align-items: space-between;
- border: solid black;.
+ align-items: space-around;
+ border-top: solid black;
+ border-left: solid black;.
     
     
     
@@ -540,6 +548,21 @@ width: calc(12.5% - 5px); /* make 5 buttons fit */}
 }
 
 
+.blackShadow2{
+    
+    display: none;
+    position: absolute;
+    top: 35px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    
+    background: black;
+    z-index: 100;
+    opacity: 0.7;
+    
+}
+
 .syntext{
     
     
@@ -548,15 +571,63 @@ width: calc(12.5% - 5px); /* make 5 buttons fit */}
     color: var(--buttColor);
     font-weight: bold;
 }
-.syninput{
+.coefficients{
+    
+    background: transparent;
+  //  border: solid var(--bordCol) 1px;
+    border: none;
+    width: 99%;
+    outline: none;
+    color: var(--bordCol);
+    font-family: regularText;
+    font-size: 2rem;
+    z-index: 150;
+    
+}
+
+.syncresult{
     
     background: transparent;
     border: solid var(--bordCol) 1px;
-    width: 50px;
+    
+    width: 99%;
+    height: 9%;
     outline: none;
     color: var(--bordCol);
+    font-family: other;
+    font-size: 3rem;
+    z-index: 150;
+    
     
 }
+
+.divisor{
+    
+    background: transparent;
+    border: solid var(--bordCol) 1px;
+    width: 20%;
+    outline: none;
+    color: var(--bordCol);
+    font-family: regularText;
+    font-size: 1.5rem;
+    z-index: 150;
+}
+
+.nextnumber{
+    
+    
+    background: var(--buttColor);
+    transform: translateX(150%);
+    
+    z-index: 150;
+}
+
+.syninput{
+    
+    transform: translateX(0%);
+    
+}
+
 .synAccept{
     
     border-radius: 15px;
@@ -566,4 +637,63 @@ width: calc(12.5% - 5px); /* make 5 buttons fit */}
     padding: 0px 30px 0px 30px;
     background: var(--buttBack);
     border: solid var(--bordCol) 1px;
+    font-family: regularText;
+    font-size: 1rem;
+}
+
+.synkeyboard{
+    
+    
+    
+    //position: absolute;
+    width: 100%;
+    height:40% ;
+  //  border:solid white;
+    
+    
+    
+    display: grid;
+
+
+   grid-template-columns: 1fr 1fr 1fr 1fr;
+   gap: 5px;
+   
+    
+}
+
+.buttsyn{
+        font-weight: bold;
+
+border-radius: 10px;
+
+font-size: 1.2rem;
+font-family: regularText ;
+
+background: var(--buttBack);
+
+color: var(--buttColor);
+
+border: solid 0.1px var(--bordCol);
+width:100%
+
+    
+    
+}
+
+.deletesyn{
+    
+    
+    
+  // background-image: url("images/deletegreen.png");
+   background-image: var(--deletebuttmIMG);
+    
+   background-size:55px;
+  background-repeat:no-repeat;
+   background-position:center;
+    
+    
+}
+.invisiblebutt{
+    
+    visibility:hidden;
 }
