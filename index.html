@@ -1003,9 +1003,9 @@ if(el.target.value==="inv"){
         
         localStorage.setItem(inv,inv_trig);
         
-        tanbutt.value="ctan(";
-        sinbutt.value="csc(";
-        cosbutt.value="sec(";
+        tanbutt.value="ctan";
+        sinbutt.value="csc";
+        cosbutt.value="sec";
         
         
 
@@ -1023,31 +1023,31 @@ if(el.target.value==="inv"){
     localStorage.setItem(inv,"trig");
     
     
-        tanbutt.value="tan(";
-        sinbutt.value="sin(";
-        cosbutt.value="cos(";
+        tanbutt.value="tan";
+        sinbutt.value="sin";
+        cosbutt.value="cos";
         
     
     
             
-        if(el.target.value==="ctan("){
+        if(el.target.value==="ctan"){
             
             
-            el.target.value="tan("
+            el.target.value="tan"
         }
         
                 
-        if(el.target.value==="csc("){
+        if(el.target.value==="csc"){
             
             
-            el.target.value="sin("
+            el.target.value="sin"
         }
         
                 
-        if(el.target.value==="sec("){
+        if(el.target.value==="sec"){
             
             
-            el.target.value="cos("
+            el.target.value="cos"
         }
         
         
@@ -1280,6 +1280,13 @@ valToCalc = valToCalc.replace(/sin\s*(\d+(?:\.\d+)?)/g, 'sin($1)');
 valToCalc = valToCalc.replace(/cos\s*(\d+(?:\.\d+)?)/g, 'cos($1)');
 valToCalc = valToCalc.replace(/tan\s*(\d+(?:\.\d+)?)/g, 'tan($1)');
 valToCalc = valToCalc.replace(/log\s*(\d+(?:\.\d+)?)/g, 'log($1)');
+valToCalc = valToCalc.replace(/sec\s*(\d+(?:\.\d+)?)/g, 'sec($1)');
+valToCalc = valToCalc.replace(/csc\s*(\d+(?:\.\d+)?)/g, 'csc($1)');
+
+valToCalc = valToCalc.replace(/ctan\s*(\d+(?:\.\d+)?)/g, 'ctan($1)');
+
+
+
 valToCalc = valToCalc.replace(/ln\s*(\d+(?:\.\d+)?)/g, 'ln($1)');
 
 valToCalc = valToCalc.replace(/W\s*(\w+(?:\.\w+)?)/g, 'W($1)');
