@@ -1292,19 +1292,37 @@ valToCalc = valToCalc.replace(/ln\s*(\d+(?:\.\d+)?)/g, 'ln($1)');
 valToCalc = valToCalc.replace(/W\s*(\w+(?:\.\w+)?)/g, 'W($1)');
 
 
-//valToCalc = valToCalc.replace(/W\s*(\w+(?:\+)/g, 'W($1)');
+//little test debug
+console.log("nums or not ? :",(/^[0-9]+$/).test(valToCalc));
 
 
-
-
-
-//valToCalc = valToCalc.replace(/lne\s*(\d+(?:\.\d+)?)/g, 'ln(Math.E)');
-
-
-  
-    let calculation=eval(valToCalc);
+    if(valToCalc.length===0){
+        
+        
+        row1.value=0;
+    }
     
-    console.log(typeof calculation);
+    
+    
+    
+    if((/^[0-9]+$/).test(valToCalc)){
+    
+    
+    
+    
+
+    return;
+    
+}
+
+
+  let calculation=eval(valToCalc);
+ 
+ 
+  
+  
+    // some debug testing
+    console.log(typeof calculation,"test please ",(/\d/).test(valToCalc));
     
     if(calculation.toString()==="undefined"){
         
@@ -1315,71 +1333,39 @@ valToCalc = valToCalc.replace(/W\s*(\w+(?:\.\w+)?)/g, 'W($1)');
     
 
    
-   //  let settheparenthesis=row1.value.toString();
-    
-    
-   
-   //   let arro= settheparenthesis.split(","); // Convert string to array
-    
-     //   console.log(arro);
-     //   arro.push("");
-            //    console.log(arro);
 
- //   for(let i=0;i<arro.length-1;i++){
-        
-        
-     //  arro[i+1]=arro[i];
-  //  }
-    
-//arro[arro.length]=")";
-   // console.log(arro);
-    //arro[0] = "(";
-//settheparenthesis= arro.join("");
- 
- //console.log(settheparenthesis);
- 
- 
- 
- /*function translateMathSyntax(inputStr) {
-  let pipeline = inputStr;
-
-  // 1. Fix implicit multiplication (e.g., "2 log 100" -> "2 * log 100")
-  pipeline = pipeline.replace(/(\d+)\s+([a-zA-Z])/g, '$1 * $2');
-
-  // 2. Wrap math terms and numbers with parentheses and 'Math.' prefix
-  pipeline = pipeline
-    .replace(/log\s+(\d+(?:\.\d+)?)/g, 'Math.log10($1)')
-    .replace(/ln\s+(\d+(?:\.\d+)?)/g, 'Math.log($1)')
-    .replace(/sin\s+(\d+(?:\.\d+)?)/g, 'Math.sin($1)')
-    .replace(/cos\s+(\d+(?:\.\d+)?)/g, 'Math.cos($1)')
-    .replace(/tan\s+(\d+(?:\.\d+)?)/g, 'Math.tan($1)')
-    .replace(/root\s+(\d+(?:\.\d+)?)/g, 'Math.sqrt($1)');
-
-  // Return the pure, transformed string string
-  return pipeline;
-}
-    
-  let calculationPro = translateMathSyntax(calculation)
-    */
     
    let formatCalculation=calculation.toLocaleString("en-US", {
     minimumFractionDigits: 0,
     maximumFractionDigits:9,
   });
     
-rowresult.value= formatCalculation;
-rowsign.value="";
-//row1.value= row1.value;//settheparenthesis;
-
-opHistory.value +="\n"+formatCalculation;
+    if (!(/function/).test(formatCalculation)){
+     rowresult.value= formatCalculation;
+     dynaresbg();
+     
+     
+     opHistory.value +="\n"+formatCalculation;
 opHistory.value +="\n"+row1.value;
 
 let opHistoryUpdate = localStorage.getItem("opHistory") +formatCalculation + "\n"+row1.value+"\n";
 
 localStorage.setItem("opHistory",opHistoryUpdate);
-setTimeout(function()
-{
-  //  var textArea = document.getElementById('outputTextResultsArea');
+
+     
+     
+ }
+  
+    
+    
+
+rowsign.value="";
+
+
+
+  
+  
+  setTimeout(()=>{
     opHistory.scrollTop = opHistory.scrollHeight;
 }, 10);
 
@@ -1388,12 +1374,11 @@ setTimeout(function()
 
             rsultbool=true;
 
-            dynaresbg();
-        
-        
-        //row1.scrollLeft =innerWidth;
+        rowresult.className +=" resultAnimation";
 
-//row1.scrollWidth
+        
+        
+// Shrinking result size dynamically accourdding to result size
 
 
     if(rowresult.value.toString().length>13){
@@ -1403,7 +1388,6 @@ setTimeout(function()
 
     
 
-rowresult.className +=" resultAnimation";
 
 
 
@@ -1441,26 +1425,16 @@ setTimeout(()=>{
     
 }
     ,500);
-}
+}   //END OF = BUTTON FUNCTIONALITY
     
-});
+}); //END OF ADDEEVENTLISTENER FUNCTION
     
     
-});
+}); //END OF BUTTON CONTAINER FOREACH LOOP
 //END OF BUTTON FUNCTIONS......
 
 
-//row1.addEventListener('input', () => {
-//row1.scrollLeft = row1.scrollWidth; });
 
-
-//row1.addEventListener('input', function() { this.scrollLeft = this.scrollWidth; });
-
-
-//row1.addEventListener('focus', () =>. {
-
-//row1.scrollLeft =row1.scrollWidth;
-//});
 
 
 
