@@ -593,7 +593,17 @@ width: calc(12.5% - 5px); /* make 5 buttons fit */}
     font-family: regularText;
     font-size: 2rem;
     z-index: 150;
+    border-radius: 9px;
     
+}
+
+
+.coefficients:active{
+    
+    
+    
+    
+    box-shadow: 0 0 10px 10px var(--bordCol), 0 0 20px 20px #ffffff;
 }
 
 .syncresult{
@@ -622,6 +632,17 @@ width: calc(12.5% - 5px); /* make 5 buttons fit */}
     font-family: regularText;
     font-size: 2.5rem;
     z-index: 150;
+    border-radius: 9px;
+}
+
+
+.divisor:active{
+    
+    
+    
+    
+    box-shadow: 0 0 10px 10px var(--bordCol);
+    box-shadow: 0 0 10px 10px var(--bordCol), 0 0 20px 20px #ffffff;
 }
 
 .nextnumber{
