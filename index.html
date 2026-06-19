@@ -151,7 +151,7 @@
  </div>
             
     <div class="buttonBox">
-            <button class="butt" value="logx(">fun1</button> 
+            <button class="butt" value="bin">Bin</button> 
             <button class="butt" value="W">W</button>           <button class="butt" value="logx(">fun2</button>           <button class="butt" value="logx(">fun3</button>  
     
         <button class="butt syn" value="syn">Syn</button> 
@@ -394,7 +394,7 @@ let nextnumber = document.querySelector(".nextnumber");
 let synAccept = document.querySelector(".synAccept");
 let syncresult = document.querySelector(".syncresult");
 
-
+let modalMode="";
 
 //divisor.innerHTML =`<option>DIVISOR</option>`;
     
@@ -885,7 +885,7 @@ if(row1.value ==="0") {
 
  row1.value=""; }
     
-if(el.target.value !="<|" && el.target.value !="=" && el.target.value !="angle_measure" && el.target.value != inv && el.target.value !="c" && el.target.value != "syn"){
+if(el.target.value !="<|" && el.target.value !="=" && el.target.value !="angle_measure" && el.target.value != inv && el.target.value !="c" && el.target.value != "syn" && el.target.value !="bin"){
 
 
 
@@ -896,6 +896,19 @@ if(el.target.value !="<|" && el.target.value !="=" && el.target.value !="angle_m
 
 
 }
+
+
+
+
+if(el.target.value ==="bin"){
+    
+    modalMode="bin";
+    
+    openBinDialog();
+    
+    
+}
+
 
 
 
@@ -1477,6 +1490,10 @@ setTimeout(()=>{
   
      cssRoot.style.setProperty("--backImg",`white`);
      
+     
+     
+     cssRoot.style.setProperty("--backIcon","url(images/back_black.jpg")
+     
    backbutt.style.backgroundImage=`url("images/deleteblack.png")`;
    
    
@@ -1563,12 +1580,15 @@ setTimeout(()=>{
              
 cssRoot.style.setProperty("--buttBack","linear-gradient(to bottom, #000000,#000000,lightblue)");
   
-     cssRoot.style.setProperty("--backImg",`black`);
+    // cssRoot.style.setProperty("--backImg",`url(images/)`);
              
      backbutt.style.backgroundImage=`url("images/deletewhite.png")`;
      
      
      cssRoot.style.setProperty("--deletebuttmIMG","url(images/deleteblack.png");
+     
+     
+     cssRoot.style.setProperty("--backIcon","url(images/back_white.jpg");
      
      
    backbutt.style.backgroundSize="35px";
@@ -1655,6 +1675,8 @@ cssRoot.style.setProperty("--buttFont","regularText");
              
              cssRoot.style.setProperty("--buttBack","linear-gradient(to bottom, rgba(0, 77, 26, 0.6), rgba(0, 0, 0, 0.7))");
              
+             
+       cssRoot.style.setProperty("--backIcon","url(images/back_matrix.jpg")      
    
     rootButt.style.backgroundImage=`url("images/rootGreen.png"),${getComputedStyle(cssRoot).getPropertyValue("--buttBack")}`;
    
@@ -1664,7 +1686,7 @@ cssRoot.style.setProperty("--buttFont","regularText");
              
              
      backbutt.style.backgroundImage=`url("images/deletegreen.png")`;
-     
+
      
      cssRoot.style.setProperty("--deletebuttmIMG","url('images/deletewhite.png'");
      
@@ -1804,6 +1826,365 @@ cssRoot.style.setProperty("--backResult",backresult);
         
         synDialog.style.display="block";
     blackShadow.style.display="block"
+        
+        
+    }
+    
+    
+function openBinDialog(){
+        
+let binDialog= document.createElement("div");
+ binDialog.className= "binDialog";
+ document.body.appendChild(binDialog);
+ 
+let binNav= document.createElement("nav");
+ binNav.className= "binNav";
+ binDialog.appendChild(binNav);
+ 
+ 
+ let navTitle= document.createElement("h3");
+ navTitle.className= "navTitle";
+ 
+ binNav.appendChild(navTitle);
+        
+  let binexitx= document.createElement("button");
+ binexitx.className= "binexitx";
+        
+ binexitx.innerText="×";
+        
+   binNav.appendChild(binexitx);
+                 
+        
+   binexitx.addEventListener("click",()=>{
+       
+       binDialog.remove();
+       
+   });     
+   
+   if(modalMode==="bin"){
+       navTitle.innerText="BINARY CONVERSIONS"
+ 
+ 
+ let backtobin= document.createElement("button");     
+ 
+ 
+ backtobin.className="backtobin";
+// backtobin.innerText="back <--";
+ binDialog.appendChild(backtobin);
+ backtobin.addEventListener("click",()=>{
+     
+     binDialog.remove();
+     
+     setTimeout(()=>{
+         openBinDialog();
+         
+     },100);
+ });
+ 
+ 
+ let binbuttonsdiv= document.createElement("div");     
+ 
+ binbuttonsdiv.className="binbuttonsdiv";
+
+binDialog.appendChild(binbuttonsdiv);
+let bintodec= document.createElement("button");
+ bintodec.className= "bintodec binbuttons";
+ bintodec.innerText="Binary To Decimal";
+ binbuttonsdiv.appendChild(bintodec);  
+ 
+ let dectobin= document.createElement("button");
+ dectobin.className= "dectobin binbuttons";
+ dectobin.innerText="Decimal To Binary"
+ binbuttonsdiv.appendChild(dectobin);  
+ 
+ 
+ 
+ bintodec.addEventListener("click",(e)=>{
+     navTitle.innerText="Binary To Decimal Conversion"
+     
+     
+     backtobin.style.display="block";
+     e.target.style.display="none";
+     dectobin.style.display="none";
+     
+     
+    let binaryInput= document.createElement("input");     
+ binaryInput.type="text";
+ binaryInput.className="binaryInput";
+ binaryInput.placeholder="TYPE IN YOUR BINARY";
+ binaryInput.readOnly= true;
+
+binDialog.appendChild(binaryInput);  
+     
+     
+let divBinbuttons = document.createElement("div");
+divBinbuttons.className="divBinbuttons";
+
+
+binDialog.appendChild(divBinbuttons);
+
+
+for(let i=0;i<4;i++){
+    
+    let element= document.createElement('button');
+    
+    element.value=i;
+    element.innerText=i;
+    element.className="buttons1and0";
+    if(i==2){
+        
+        
+       element.value=".";
+    element.innerText="."; 
+    }
+    if(i==3){
+        
+        element.className ="buttons1and0 deletebinarybutt";
+        element.innerText="";
+
+    }
+    divBinbuttons.appendChild(element);
+    
+}
+ let buttons1and0group= document.querySelectorAll(".buttons1and0");
+
+buttons1and0group.forEach((butt,index)=>{
+    
+    butt.addEventListener("click",(button)=>{
+        
+       
+       
+       
+       
+       
+       if(button.target.value!= 3){
+           
+        binaryInput.value += button.target.value;
+          
+           
+       }else{
+           
+           
+           binaryInput.value=binaryInput.value.slice(0,binaryInput.value.length -1) ;
+           
+           
+           if(binaryInput.value.length===0){
+               
+               
+               
+           }
+           
+           
+       }
+        
+    });
+    
+    
+})
+     
+     
+     
+     let binToDecResultButt= document.createElement("button");
+     
+     binToDecResultButt.className="binToDecResultButt";
+     binToDecResultButt.innerText="COMPUTE"
+     binDialog.appendChild(binToDecResultButt);
+     
+     
+     
+     binToDecResultButt.addEventListener("click",(e)=>{
+         let binaryDecimalString=binaryInput.value.toString();
+       let binaryString=binaryInput.value.toString();
+       
+       
+binaryString= binaryString.replace(/\.\d+/,"");
+
+
+    if(binaryString===""){
+        
+        binaryString="0";
+        
+    }
+
+
+
+
+       binaryDecimalString=binaryDecimalString.replace(/^\d+\.?/,"");
+       
+       binaryDecimalString=binaryDecimalString.replace(/^\s?\.?/,"");
+    console.log(binaryDecimalString," deci points");
+       
+       let binaryArr= binaryString.split("");
+       binaryArr.reverse();
+       
+       
+       console.log(binaryArr,"ñ8kn ñik");
+       
+       let binaryDecimalArr=binaryDecimalString.split("")
+    //binaryDecimalArr.reverse();
+       
+       console.log(binaryDecimalArr);
+       console.log(binaryArr);
+       let resultval=0;
+      let resultval2=0;
+      
+     for(let i=binaryArr.length -1;i>=0;i--){
+           
+           
+      let newVal =parseInt( binaryArr[i])*2**i;
+           
+           
+           
+           resultval = resultval + newVal;
+           
+         
+       }
+       console.log(resultval);
+for(let i=binaryDecimalArr.length -1 ;i>=0;i--){
+           console.log(i+1, " plus");
+           
+      let newVal =parseFloat( binaryDecimalArr[i])*2**(-(i+1));
+           
+           console.log("steps steos ",newVal);
+           
+           
+           resultval2 = resultval2 + newVal;
+           
+          
+       }    
+       
+       
+       
+       
+       
+       console.log(resultval2);
+       
+       console.log("final result ",resultval+resultval2);
+       
+       binaryInput.value =parseFloat(resultval+ resultval2);
+     });
+     
+ });
+ 
+ 
+ dectobin.addEventListener("click",(e)=>{
+     
+     backtobin.style.display="block";
+     navTitle.innerText="Decimal To Binary Conversion"
+   e.target.style.display="none";
+     bintodec.style.display="none";
+     
+     
+    let binaryInput= document.createElement("input");     
+ binaryInput.type="text";
+ binaryInput.className="binaryInput";
+ binaryInput.placeholder="TYPE IN YOUR DECIMAL";
+ binaryInput.readOnly= true;
+
+binDialog.appendChild(binaryInput);  
+     
+     
+let divDecbuttons = document.createElement("div");
+divDecbuttons.className="divDecbuttons";
+
+
+binDialog.appendChild(divDecbuttons);
+
+
+for(let i=1;i<13;i++){
+    
+    let element= document.createElement('button');
+    
+    element.value=i;
+    element.innerText=i;
+   
+            
+        element.className ="buttons1to9";
+    
+    if(i=== 10){
+        
+    element.value=0;    
+    element.innerText=0;
+    }
+    
+    if(i===12){
+        
+        element.className ="buttons1to9 deletebinarybutt";
+        element.innerText="";
+
+    }   
+    
+    if(i===11){
+        
+        
+        element.innerText=".";
+        element.value =".";
+
+    }   
+    
+    
+    
+    divDecbuttons.appendChild(element);
+}
+     
+     let buttons1to9= document.querySelectorAll(".buttons1to9");
+     
+     
+     
+     buttons1to9.forEach((butt,index)=>{
+         
+         
+         butt.addEventListener("click",(button)=>{
+             
+             
+    if(button.target.value !="12"){
+            
+            
+            
+            binaryInput.value += button.target.value;
+    }
+            
+            
+            if(button.target.value==="12"){
+                       
+           binaryInput.value=binaryInput.value.slice(0,binaryInput.value.length -1) ;
+            
+            }
+             
+             
+             
+             
+         });
+         
+         
+         
+     })
+     
+     
+     let decToBinResultButt =document.createElement("button");
+     
+     decToBinResultButt.className="binToDecResultButt";
+     
+     decToBinResultButt.innerText="COMPUTE";
+     
+     
+     decToBinResultButt.addEventListener("click",(e)=>{
+         
+         
+         
+     });
+     
+     
+     
+ });
+       
+       
+       
+       
+   }
+        
+        
+
         
         
     }
