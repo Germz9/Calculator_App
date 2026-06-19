@@ -15,6 +15,7 @@
         
         
         
+        
 <div class="mainBox">
             
             
@@ -1580,7 +1581,7 @@ setTimeout(()=>{
              
 cssRoot.style.setProperty("--buttBack","linear-gradient(to bottom, #000000,#000000,lightblue)");
   
-    // cssRoot.style.setProperty("--backImg",`url(images/)`);
+     cssRoot.style.setProperty("--backImg",`black`);
              
      backbutt.style.backgroundImage=`url("images/deletewhite.png")`;
      
@@ -1863,6 +1864,29 @@ let binNav= document.createElement("nav");
    
    if(modalMode==="bin"){
        navTitle.innerText="BINARY CONVERSIONS"
+  
+ let binaryicon= document.createElement("img");     
+ 
+ binaryicon.className="binaryicon";
+ 
+ 
+ 
+if(localStorage.getItem("colortheme_calculator")==="matrix"){
+     binaryicon.src="images/binary_green.jpg";
+     
+     
+ }else if(localStorage.getItem("colortheme_calculator")==="dark"){
+     
+     binaryicon.src="images/binary_blackwhite.jpg";
+ }else{
+     
+     binaryicon.src="images/binary_blackblue.jpg";
+     
+     
+ }
+ 
+ 
+ binDialog.appendChild(binaryicon);
  
  
  let backtobin= document.createElement("button");     
@@ -1901,7 +1925,7 @@ let bintodec= document.createElement("button");
  
  bintodec.addEventListener("click",(e)=>{
      navTitle.innerText="Binary To Decimal Conversion"
-     
+     binaryicon.remove();
      
      backtobin.style.display="block";
      e.target.style.display="none";
@@ -2068,7 +2092,7 @@ for(let i=binaryDecimalArr.length -1 ;i>=0;i--){
  
  
  dectobin.addEventListener("click",(e)=>{
-     
+     binaryicon.remove();
      backtobin.style.display="block";
      navTitle.innerText="Decimal To Binary Conversion"
    e.target.style.display="none";
@@ -2167,11 +2191,93 @@ for(let i=1;i<13;i++){
      
      decToBinResultButt.innerText="COMPUTE";
      
+     binDialog.appendChild(decToBinResultButt);
+     
+     let hi="bitch fucker";
+     
+     console.log(hi[1]);
      
      decToBinResultButt.addEventListener("click",(e)=>{
          
          
+       
          
+         function binary( x){
+	
+let num =x;	
+let bin="";
+	while (true){
+		bin += String(num%2);
+		num = parseInt(num/2);
+		
+		
+		console.log(num,"and ",bin );
+		
+				if(num<1){
+		    
+		    
+		    break;
+		}
+	//	std::cout<<num<<" and "<<bin<<" \n";
+	}
+	
+//	char* bitch= bin.c_str();
+//printf("%s\n",bin)
+
+	let binary_result="";
+	for(let i=bin.length -1 ; i>=0;i--){
+		
+		//std::cout<<bin[i]<<" \n";
+		
+		binary_result +=bin[i];
+	}
+	
+	
+//	std::remove(binary_result.begin(), binary_result.end(),' ');
+
+
+    console.log(binary_result," is result nigga!! ");
+	return binary_result;
+	
+}
+
+function binToDecimals(x){
+let mynum=x;
+let string="";
+while(mynum>0){
+    
+    
+    mynum = mynum*2;
+    string += String(parseInt(mynum));
+    mynum= mynum - parseInt(mynum);
+    
+     
+    
+    
+}
+
+console.log(string);
+string=string.slice(0,15);
+return string;
+}
+
+if(binaryInput.value.startsWith(".")){
+    
+    binaryInput.value=0+binaryInput.value;
+}
+let inputnow= binaryInput.value;
+
+//inputnow= inputnow.replace(/^\.\d+$/,0);
+
+let decPortion =inputnow - parseInt(binaryInput.value);
+    
+
+    console.log(decPortion," portion");
+    
+    
+    binaryInput.value = binary(parseInt(inputnow)) + ( decPortion=== 0  ? "": "."+ binToDecimals(decPortion)) ;
+    
+
      });
      
      
