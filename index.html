@@ -1833,7 +1833,8 @@ cssRoot.style.setProperty("--backResult",backresult);
     
     
 function openBinDialog(){
-        
+
+blackShadow.style.display="block" ;      
 let binDialog= document.createElement("div");
  binDialog.className= "binDialog";
  document.body.appendChild(binDialog);
@@ -1859,7 +1860,7 @@ let binNav= document.createElement("nav");
    binexitx.addEventListener("click",()=>{
        row1.value=0;
        binDialog.remove();
-       
+       blackShadow.style.display="none" ;    
    });     
    
    

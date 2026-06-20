@@ -554,7 +554,7 @@ width: calc(12.5% - 5px); /* make 5 buttons fit */}
     
     position: absolute;
     display: none;
-    top: 75%;
+    top: 25%;
     left: 0px;
     background-image: var(--backIcon);
     width: 50px;
@@ -606,7 +606,7 @@ width: calc(12.5% - 5px); /* make 5 buttons fit */}
     
     
     position: absolute;
-    top: 10%;
+    top: 50%;
     left: 0%;
     width: 100%;
     height: 20%;
@@ -655,26 +655,26 @@ width: calc(12.5% - 5px); /* make 5 buttons fit */}
     
     
     position: absolute;
-    top: 25%;
+    bottom: 5%;
     left: 0%;
     width:100%;
     height: 40%;
     display: grid;
     grid-template-columns: auto auto;
     gap: 5px;
-    border: solid;
+   // border: solid;
 }
 .divDecbuttons{
     
     position: absolute;
-    top: 25%;
+    bottom: 5%;
     left: 0%;
     width:100%;
     height: 40%;
     display: grid;
     grid-template-columns: auto auto auto;
     gap: 5px;
-    border: solid;
+  //  border: solid;
     
 }
 .binToDecResultButt{
@@ -683,7 +683,7 @@ width: calc(12.5% - 5px); /* make 5 buttons fit */}
     
     
     position: absolute;
-    top: 65%;
+    top: 25%;
     left: 50%;
     transform: translateX(-50%);
     background: var(--buttBack);
@@ -692,6 +692,8 @@ width: calc(12.5% - 5px); /* make 5 buttons fit */}
     outline: none;
     border-radius: 12px;
     font-size: 2rem;
+    padding-left: 30px;
+    padding-right: 30px;
 }
 
 
