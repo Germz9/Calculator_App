@@ -462,7 +462,7 @@ width: calc(12.5% - 5px); /* make 5 buttons fit */}
   //  align-items: center;
     transform: translate(-50%,-50%) scale(0);
  // padding-bottom:10px 30px 0px 30px 0px;
-   background: linear-gradient(to bottom, transparent,var(--buttColor));
+   background: linear-gradient(to bottom, transparent,transparent,var(--buttColor),var(--buttColor));
       z-index: 200;
      
     animation:synPopup 0.2s forwards linear;
@@ -497,7 +497,7 @@ width: calc(12.5% - 5px); /* make 5 buttons fit */}
     
     100%{
         
-        transform:translate(-50%,-50%)  scale(1);
+        transform: translate(-50%,-50%)  scale(1);
     }
     
 }
@@ -518,7 +518,7 @@ width: calc(12.5% - 5px); /* make 5 buttons fit */}
     
     background:var(--bordCol);
   //  border: solid black 0.5px ;
-    
+    z-index: 200;
     
 }
 .synDialogNav{
@@ -580,7 +580,8 @@ width: calc(12.5% - 5px); /* make 5 buttons fit */}
    display: flex;
   justify-content: center;
  align-items: center;
- border: solid black;.
+ border: solid black;
+ z-index: 200;
     
 }
 .exitx{
@@ -644,7 +645,7 @@ width: calc(12.5% - 5px); /* make 5 buttons fit */}
     z-index: 100;
     font-family: regularText;
     font-size: 2rem;
-    color: var(--buttColor);
+    color: var(--bordCol);
     outline: none;
 
     
@@ -707,6 +708,7 @@ width: calc(12.5% - 5px); /* make 5 buttons fit */}
     font-family: regularText;
     font-size: 2rem;
     border-radius: 12px;
+    border: solid 1.5px var(--bordCol);
 }
 
 .buttons1and0:active{
@@ -717,13 +719,56 @@ transform: scale(1.5) ;
   
     
   box-shadow: 0 0 10px 1px var(--buttColor), 0 0 10px 1px var(--buttColor), 0 0 10px 1px var(--buttColor), 0 0 10px 1px var(--buttColor), 0 0 15px 1px var(--buttColor);
-}
+
     
+}
+
+
+
+
+
+
+.divhexbuttons1to0{
+    
+    position: absolute;
+    bottom: 5%;
+    left: 0%;
+    width:50%;
+    height: 40%;
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 5px;
+//   border:solid pink 5px;
+    
+    
+    
+}
+
+.divhexbuttonsAtoF{
+    
+    position: absolute;
+    bottom: 5%;
+    left: 50%;
+    width:49%;
+    height: 40%;
+    display: grid;
+    grid-template-columns: 50px
+     50px 50px      ;
+    gap: 5px;
+ //  border:solid dodgerblue 3px;
+    
+}
+
+
+.delhex{
+    
+    
+ //   width: 50%;
 }
 .binaryicon{
     
-    width: 300px;
-    height: 300px;
+    width: 99%;
+    height: 90%;
     position: absolute;
     bottom: 0px;
     opacity: 0.3;
@@ -740,6 +785,7 @@ transform: scale(1.5) ;
     font-family: regularText;
     font-size: 2rem;
     border-radius: 12px;
+    border: solid 1.5px var(--bordCol);
 }
 
 .buttons1to9:active{
@@ -750,6 +796,28 @@ transform: scale(1.5) ;
   box-shadow: 0 0 10px 1px var(--buttColor), 0 0 10px 1px var(--buttColor), 0 0 10px 1px var(--buttColor), 0 0 10px 1px var(--buttColor), 0 0 15px 1px var(--buttColor);
     
 }
+.buttonsAtoF{
+    
+        
+    background: var(--buttBack);
+    color: var(--buttColor);
+    
+    font-family: regularText;
+    font-size: 2rem;
+    border-radius: 12px;
+    border: solid 1.5px var(--bordCol);
+    
+}
+.buttonsAtoF:active{
+    
+    transform: scale(1.5) ;
+  
+    
+  box-shadow: 0 0 10px 1px var(--buttColor), 0 0 10px 1px var(--buttColor), 0 0 10px 1px var(--buttColor), 0 0 10px 1px var(--buttColor), 0 0 15px 1px var(--buttColor);
+    
+}
+
+
 .deletebinarybutt{
     
     

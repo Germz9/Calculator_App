@@ -153,7 +153,7 @@
             
     <div class="buttonBox">
             <button class="butt" value="bin">Bin</button> 
-            <button class="butt" value="W">W</button>           <button class="butt" value="logx(">fun2</button>           <button class="butt" value="logx(">fun3</button>  
+            <button class="butt" value="W">W</button>           <button class="butt" value="hex">Hex</button>           <button class="butt" value="logx(">fun3</button>  
     
         <button class="butt syn" value="syn">Syn</button> 
          <button class="butt rootButt" value="root("></button> 
@@ -910,6 +910,16 @@ if(el.target.value ==="bin"){
     
 }
 
+
+
+if(el.target.value ==="hex"){
+    
+    modalMode="hex";
+    
+    openBinDialog();
+    
+    
+}
 
 
 
@@ -2407,11 +2417,462 @@ let decPortion =inputnow - parseInt(binaryInput.value);
        
        
        
-   }
+   }else if (modalMode === "hex") {
+
+    navTitle.innerText = "HEXADECIMAL CONVERSIONS";
+
+    let binaryicon = document.createElement("img");
+    binaryicon.className = "binaryicon";
+    binaryicon.style.width = "99%";
+    binaryicon.style.height = "60%";
+    binaryicon.style.opacity = "0.5";
+    binaryicon.style.position = "absolute";
+    binaryicon.style.top = "0%";
+    binaryicon.style.left = "0px";
+
+    if (localStorage.getItem("colortheme_calculator") === "matrix") {
+        binaryicon.src = "images/hexa_img_green.png";
+    } else if (localStorage.getItem("colortheme_calculator") === "dark") {
+        binaryicon.src = "images/hexa_img_white.png";
+    } else {
+        binaryicon.src = "images/hexa_img_black.png";
+    }
+
+    binDialog.appendChild(binaryicon);
+
+    let backtobin = document.createElement("button");
+    backtobin.className = "backtobin";
+    binDialog.appendChild(backtobin);
+
+    backtobin.addEventListener("click", () => {
+        binDialog.remove();
+        setTimeout(() => {
+            openBinDialog();
+        }, 100);
+    });
+
+    let binbuttonsdiv = document.createElement("div");
+    binbuttonsdiv.className = "binbuttonsdiv";
+    binDialog.appendChild(binbuttonsdiv);
+
+    let bintodec = document.createElement("button");
+    bintodec.className = "bintodec binbuttons";
+    bintodec.innerText = "Hexadecimal To Decimal";
+    binbuttonsdiv.appendChild(bintodec);
+
+    let dectobin = document.createElement("button");
+    dectobin.className = "dectobin binbuttons";
+    dectobin.innerText = "Decimal To Hexadecimal";
+    binbuttonsdiv.appendChild(dectobin);
+
+    bintodec.addEventListener("click", (e) => {
+        
+        navTitle.innerText = "Hexadecimal To Decimal Conversion";
+        binaryicon.remove();
+
+        backtobin.style.display = "block";
+        e.target.style.display = "none";
+        dectobin.style.display = "none";
+
+        let binaryInput = document.createElement("input");
+        binaryInput.type = "text";
+        binaryInput.className = "binaryInput";
+        binaryInput.placeholder = "TYPE IN YOUR HEXADECIMAL";
+        binaryInput.readOnly = true;
+        binDialog.appendChild(binaryInput);
+
+        let divhexbuttons1to0 = document.createElement("div");
+        divhexbuttons1to0.className = "divhexbuttons1to0";
+        
+        
+        let divhexbuttonsAtoF = document.createElement("div");
+        divhexbuttonsAtoF.className = "divhexbuttonsAtoF";
+        
+        binDialog.appendChild(divhexbuttonsAtoF);     
+        
+        
+        binDialog.appendChild(divhexbuttons1to0);
+
+        // FIXED: Loop goes from 1 to 10 so the '0' button condition triggers successfully
+        for (let i = 1; i <= 10; i++) {
+            let element = document.createElement('button');
+            element.className = "buttons1and0";
+
+            if (i === 10) {
+                element.value = "0";
+                element.innerText = "0";
+            } else {
+                element.value = i;
+                element.innerText = i;
+            }
+            // FIXED: Appending to the correct element container
+            divhexbuttons1to0.appendChild(element);
+            
+            
+      
+        }
+        
+        
+   let hexlettersArr=["A","B","C","D","E","F",".","X","_"];     
+            
+    for (let i = 0; i < 9; i++) {
+            let element = document.createElement('button');
+            element.className = "buttonsAtoF";
+
+if(i!=8){
+
+        element.value=hexlettersArr[i];
+        element.innerText=hexlettersArr[i];
+         element.className = "buttonsAtoF";
+
+}else{
+        
+         element.className = "deletebinarybutt delhex buttonsAtoF";
+        element.value=hexlettersArr[i];
+      element.innerText=hexlettersArr[i];
+      element.style.backgroundSize="100% 80%";
+      element.style.color="transparent";
+      
+}
+        
+
+            divhexbuttonsAtoF.appendChild(element);
+        }
+        
+        
+        
+        
         
         
 
+        let buttons1and0Hexgroup = document.querySelectorAll(".buttons1and0");
         
+let buttonsAtoF =document.querySelectorAll(".buttonsAtoF");
+        
+        let count = 0;
+        let runnim = 0;
+
+        function running() {
+            count++;
+            console.log(count);
+            if (count >= 33) {
+                binaryInput.value = "";
+            }
+            runnim = setTimeout(() => {
+                running();
+            }, 10);
+        }
+
+        // FIXED: Safe check to see if delete button exists before adding listeners
+        let deleteBtn = document.querySelector(".deletebinarybutt");
+        if (deleteBtn) {
+            deleteBtn.addEventListener("touchstart", (e) => {
+                running();
+            });
+
+            deleteBtn.addEventListener("touchend", (e) => {
+                count = 0;
+                clearTimeout(runnim);
+            });
+        }
+
+        buttons1and0Hexgroup.forEach((butt) => {
+            butt.addEventListener("click", (button) => {
+                if (navigator.vibrate) {
+                    navigator.vibrate(50);
+                }
+                binaryInput.value += button.target.value;
+            });
+        });
+        
+        
+  buttonsAtoF.forEach((butt) => {
+            butt.addEventListener("click", (button) => {
+                if (navigator.vibrate) {
+                    navigator.vibrate(50);
+                }
+                
+                
+ if(button.target.value !="_"){ 
+     
+    binaryInput.value += button.target.value;
+         
+ }else{
+     binaryInput.value=binaryInput.value.slice(0,binaryInput.value.length -1) ;
+
+ }
+            });
+        });      
+        
+        
+        
+        
+
+
+
+
+
+
+
+
+
+        let hexToDecResultButt = document.createElement("button");
+        hexToDecResultButt.className = "binToDecResultButt";
+        hexToDecResultButt.innerText = "COMPUTE";
+        binDialog.appendChild(hexToDecResultButt);
+
+        hexToDecResultButt.addEventListener("click", (e) => {
+            // Hexadecimal parsing logic can 
+            
+            
+function back_slice( x,str){
+	
+	
+	let data="";
+	
+	for (let i=x;i<=str.length -1;i++){
+		
+		data+=str[i];
+	}
+	
+	return data;
+}
+       
+       
+   function reverse_str( str){
+	
+	
+	let my_str="";
+	
+	for(let i=str.length-1;i>=0;i--){
+		
+		my_str+=str[i];
+		
+	}
+	return my_str;
+}
+    
+       
+          
+           
+    function  hexToDec( hex){
+	let my_hex="";
+	if (hex.length >= 2 && hex[0] === '0' && (hex[1] === 'x' || hex[1] === 'X')) {
+       
+        my_hex = reverse_str(back_slice(2, hex));
+    } else {
+        
+        my_hex = reverse_str(hex);
+    }
+	
+	let x=0;
+	let hex_letter=0;
+	//std::regex hex_regex{R"([A-Fa-f0-9])"};
+	
+	
+	for(let i=0;i<=my_hex.length-1;i++){
+		
+		if(my_hex[i]==='A'){
+			hex_letter= 10;
+		}else if(my_hex[i]==='B' || my_hex[i]==='b'){
+			hex_letter= 11;
+			
+		}else if(my_hex[i]==='C' || my_hex[i]==='c'){
+			hex_letter= 12;
+			
+		}else if(my_hex[i]==='D' || my_hex[i]==='d'){
+			hex_letter= 13;
+			
+		}else if(my_hex[i]==='E' || my_hex[i]==='e'){
+			hex_letter= 14;
+			
+		}else if(my_hex[i]==='F' || my_hex[i]==='f'){
+			hex_letter= 15;
+	}else{
+			hex_letter= parseInt(my_hex[i]);
+		}
+	//	std::cout<<  hex_letter <<"\n";
+		x +=(16**i)*(hex_letter);
+	}
+	
+	
+	return x;
+}
+       
+           
+           
+           binaryInput.value= hexToDec(binaryInput.value);
+           
+            
+            
+        
+        
+        
+    });
+    
+    
+    });
+    
+    
+    
+    
+    dectobin.addEventListener("click", (e) => { // Added missing 'click' event type for safety
+    navTitle.innerText = "Decimal To Hexadecimal Conversion";
+    binaryicon.remove();
+
+    backtobin.style.display = "block";
+    e.target.style.display = "none";
+    bintodec.style.display = "none";
+    e.target.style.display = "none";
+    dectobin.remove();
+
+    let binaryInput = document.createElement("input");
+    binaryInput.type = "text";
+    binaryInput.className = "binaryInput";
+    binaryInput.placeholder = "TYPE IN YOUR DECIMAL";
+    binaryInput.readOnly = true;
+    binDialog.appendChild(binaryInput);
+
+    let divDecbuttons = document.createElement("div");
+    divDecbuttons.className = "divDecbuttons";
+    binDialog.appendChild(divDecbuttons);
+
+    for (let i = 1; i < 13; i++) {
+        let element = document.createElement('button');
+        element.value = i;
+        element.innerText = i;
+        element.className = "buttons1to9";
+
+        if (i === 10) {
+            element.value = 0;
+            element.innerText = 0;
+        }
+        if (i === 12) {
+            element.className = "buttons1to9 deletebinarybutt";
+            element.innerText = "";
+        }
+        if (i === 11) {
+            element.innerText = ".";
+            element.value = ".";
+        }
+        divDecbuttons.appendChild(element);
+    }
+
+    let buttons1to9 = document.querySelectorAll(".buttons1to9");
+    let count = 0;
+    let runnim = 0;
+
+    function running() {
+        count++;
+        console.log(count);
+        if (count >= 33) {
+            binaryInput.value = "";
+        }
+        runnim = setTimeout(() => {
+            running();
+        }, 10);
+    }
+
+    document.querySelector(".deletebinarybutt").addEventListener("touchstart", (e) => {
+        running();
+    });
+
+    document.querySelector(".deletebinarybutt").addEventListener("touchend", (e) => {
+        count = 0;
+        clearTimeout(runnim);
+    });
+
+    buttons1to9.forEach((butt, index) => {
+        butt.addEventListener("click", (button) => {
+            navigator.vibrate(50);
+            if (button.target.value != "12") {
+                binaryInput.value += button.target.value;
+            }
+            if (button.target.value === "12") {
+                binaryInput.value = binaryInput.value.slice(0, binaryInput.value.length - 1);
+            }
+        });
+    });
+
+    let decToBinResultButt = document.createElement("button");
+    decToBinResultButt.className = "binToDecResultButt";
+    decToBinResultButt.innerText = "COMPUTE";
+    binDialog.appendChild(decToBinResultButt);
+
+    decToBinResultButt.addEventListener("click", (e) => {
+
+function decToHex( x){
+	
+	let num=parseInt(x);
+	
+	let hex ="";
+	
+	
+	while(num>0){
+		
+		
+		
+		if(num%16===10){
+		
+		hex+="A";
+		}else if(num%16===11){
+			hex+="B";
+		}else if(num%16===12){
+			hex+="C";
+		}else if(num%16===13){
+			hex+="D";}
+		
+		else if(num%16===14){
+			hex+="E";}
+			
+			else if(num%16===15){
+			hex+="F";}
+		else{
+			
+			hex +=String(num%16);
+		}
+		num=parseInt (num/16);
+	
+	}
+	let result="";
+	for(let i=hex.length-1;i>=0;i--){
+		
+		
+		result+=hex[i];
+	}
+	
+	
+	return "0x"+result;
+}
+
+
+
+binaryInput.value = decToHex( parseInt(binaryInput.value ));
+
+
+
+      //  if (binaryInput.value.startsWith(".")) {
+          //  binaryInput.value = 0 + binaryInput.value;
+        //}
+       // let inputnow = binaryInput.value;
+      //  let decPortion = inputnow - parseInt(binaryInput.value);
+
+     //   console.log(decPortion, " portion");
+
+        // Warning: binToDecimals() needs to be defined or it will crash here
+        
+    }); // Closes decToBinResultButt click listener
+
+}); // Closes dectobin event lis
+    
+    
+    
+    
+    
+    
+    
+    
+}
         
     }
         </script>
