@@ -607,21 +607,21 @@ synkeyboard.forEach((button,index)=>{
         navigator.vibrate(50);
         
         
-        if(butt.target.value !="nextnumber" && butt.target.value != "delete"){
+        if(butt.currentTarget.value !="nextnumber" && butt.currentTarget.value != "delete"){
             
             if(keyfocuson==="coefficients"){
-        coefficients.value +=butt.target.value;
+        coefficients.value +=butt.currentTarget.value;
         
         setTimeout(()=>{document.querySelector(".nextnumber").style.visibility="visible"; },100);
                 
             }else if( keyfocuson ==="divisor"){
             
             
-            divisor.value += butt.target.value;
+            divisor.value += butt.currentTarget.value;
         
             }
         } 
-        else if(butt.target.value==="nextnumber"){
+        else if(butt.currentTarget.value==="nextnumber"){
             
             if(!operationFinished){
             coefficients.value +="  ";
@@ -642,7 +642,7 @@ synkeyboard.forEach((button,index)=>{
     coefficients.value="";
     operationFinished=false;
             }
-        }else if(butt.target.value==="delete"){
+        }else if(butt.currentTarget.value==="delete"){
             
             
             
@@ -828,13 +828,13 @@ function nextsynoperation(){
     
     
     synkeyboard.forEach((i,ind)=>{
-    if(i.target.value !="nextnumber"){
+    if(i.currentTarget.value !="nextnumber"){
         
         
     i.target.style.display="none"; 
     }else{
         
-        i.target.value="NEXT OPERATION";
+        i.currentTarget.value="NEXT OPERATION";
         
         
         i.target.addEventListener("click",()=>{
@@ -843,8 +843,8 @@ function nextsynoperation(){
           synkeyboard.forEach((el,index)=>{
               
               el.target.style.display="block";
-              if(el.target.value==="nextnumber"){
-                  i.target.value="NEXT NUMBER";
+              if(el.currentTarget.value==="nextnumber"){
+                  i.currentTarget.value="NEXT NUMBER";
               }
           })  
             
@@ -888,14 +888,14 @@ if(row1.value ==="0") {
 
  row1.value=""; }
     
-if(el.target.value !="<|" && el.target.value !="=" && el.target.value !="angle_measure" && el.target.value != inv && el.target.value !="c" && el.target.value != "syn" && el.target.value !="bin"){
+if(el.currentTarget.value !="<|" && el.currentTarget.value !="=" && el.currentTarget.value !="angle_measure" && el.currentTarget.value != inv && el.currentTarget.value !="c" && el.currentTarget.value != "syn" && el.currentTarget.value !="bin"){
 
 
 
 
 
     
-    row1.value +=el.target.value;
+    row1.value +=el.currentTarget.value;
 
 
 }
@@ -903,7 +903,7 @@ if(el.target.value !="<|" && el.target.value !="=" && el.target.value !="angle_m
 
 
 
-if(el.target.value ==="bin"){
+if(el.currentTarget.value ==="bin"){
     
     modalMode="bin";
     
@@ -914,7 +914,7 @@ if(el.target.value ==="bin"){
 
 
 
-if(el.target.value ==="hex"){
+if(el.currentTarget.value ==="hex"){
     
     modalMode="hex";
     
@@ -925,7 +925,7 @@ if(el.target.value ==="hex"){
 
 
 
-if(el.target.value ==="syn"){
+if(el.currentTarget.value ==="syn"){
     
     openSynDialog();
     
@@ -933,24 +933,24 @@ if(el.target.value ==="syn"){
 }
 
 
-if(el.target.value==="/" || el.target.value==="+"|| el.target.value==="-" || el.target.value==="*" || el.target.value==="%" ){
+if(el.currentTarget.value==="/" || el.currentTarget.value==="+"|| el.currentTarget.value==="-" || el.currentTarget.value==="*" || el.currentTarget.value==="%" ){
     
-    let mySign="";//el.target.value==="/" ? "÷" : el.target.value;
+    let mySign="";//el.currentTarget.value==="/" ? "÷" : el.currentTarget.value;
     
-    switch(el.target.value){
+    switch(el.currentTarget.value){
         
         
         
         
         case "+":
-            mySign=el.target.value;
+            mySign=el.currentTarget.value;
             
             break;
             
             
 
             case "-":
-            mySign=el.target.value;
+            mySign=el.currentTarget.value;
             
             break;
             
@@ -970,7 +970,7 @@ if(el.target.value==="/" || el.target.value==="+"|| el.target.value==="-" || el.
             
             
             case "%":
-            mySign=el.target.value;
+            mySign=el.currentTarget.value;
             
             break;
             
@@ -989,7 +989,7 @@ if(el.target.value==="/" || el.target.value==="+"|| el.target.value==="-" || el.
 
 
 
-if(el.target.value==="angle_measure"){
+if(el.currentTarget.value==="angle_measure"){
     
     puttheZero();
     
@@ -1016,7 +1016,7 @@ if(el.target.value==="angle_measure"){
 //inv toggling func
 
 
-if(el.target.value==="inv"){
+if(el.currentTarget.value==="inv"){
     
     puttheZero();
     
@@ -1056,24 +1056,24 @@ if(el.target.value==="inv"){
     
     
             
-        if(el.target.value==="ctan"){
+        if(el.currentTarget.value==="ctan"){
             
             
-            el.target.value="tan"
+            el.currentTarget.value="tan"
         }
         
                 
-        if(el.target.value==="csc"){
+        if(el.currentTarget.value==="csc"){
             
             
-            el.target.value="sin"
+            el.currentTarget.value="sin"
         }
         
                 
-        if(el.target.value==="sec"){
+        if(el.currentTarget.value==="sec"){
             
             
-            el.target.value="cos"
+            el.currentTarget.value="cos"
         }
         
         
@@ -1090,7 +1090,7 @@ if(el.target.value==="inv"){
 
 
 
-if(el.target.value==="<|"){
+if(el.currentTarget.value==="<|"){
     
    valToCalc =row1.value ;
     
@@ -1104,7 +1104,7 @@ if(el.target.value==="<|"){
 }
 
 
-if(el.target.value==="c"){
+if(el.currentTarget.value==="c"){
     row1.value="0";
     rowsign.value="";
     rowresult.value="";
@@ -1120,10 +1120,10 @@ function p(base,exp){
 }
 
 
-if(el.target.value=== "!"){
+if(el.currentTarget.value=== "!"){
     
     
-    el.target.value.replace(/(\d+)\s*!/g, 'fact($1)');
+    el.currentTarget.value.replace(/(\d+)\s*!/g, 'fact($1)');
 }
 
 
@@ -1283,7 +1283,7 @@ function fact(x){
 //const e=Math.E;
 //const π=Math.PI;
 
-if(el.target.value==="="){
+if(el.currentTarget.value==="="){
     valToCalc="";
     valToCalc= row1.value;
     
@@ -1783,19 +1783,19 @@ cssRoot.style.setProperty("--backResult",backresult);
 
         
         
-      if(e.target.value==="light"){
+      if(e.currentTarget.value==="light"){
           localStorage.setItem("colortheme_calculator","light");
           
           setTimeout(()=>{setInitalStyles();},100);
           
           
-      }  else if(e.target.value==="dark"){
+      }  else if(e.currentTarget.value==="dark"){
           localStorage.setItem("colortheme_calculator","dark")
           
            setTimeout(()=>{setInitalStyles();},100);
            
     
-      }else if(e.target.value==="matrix"){
+      }else if(e.currentTarget.value==="matrix"){
         localStorage.setItem("colortheme_calculator","matrix")
         
            setTimeout(()=>{setInitalStyles();},100);
@@ -2059,9 +2059,9 @@ buttons1and0group.forEach((butt,index)=>{
        
        
        
-       if(button.target.value!= 3){
+       if(button.currentTarget.value!= 3){
            
-        binaryInput.value += button.target.value;
+        binaryInput.value += button.currentTarget.value;
           
            
        }else{
@@ -2293,15 +2293,15 @@ let runnim =0;
           navigator.vibrate(50);   
              
              
-    if(button.target.value !="12"){
+    if(button.currentTarget.value !="12"){
             
             
             
-            binaryInput.value += button.target.value;
+            binaryInput.value += button.currentTarget.value;
     }
             
             
-            if(button.target.value==="12"){
+            if(button.currentTarget.value==="12"){
                        
            binaryInput.value=binaryInput.value.slice(0,binaryInput.value.length -1) ;
             
@@ -2583,7 +2583,7 @@ let buttonsAtoF =document.querySelectorAll(".buttonsAtoF");
                 if (navigator.vibrate) {
                     navigator.vibrate(50);
                 }
-                binaryInput.value += button.target.value;
+                binaryInput.value += button.currentTarget.value;
             });
         });
         
@@ -2595,9 +2595,9 @@ let buttonsAtoF =document.querySelectorAll(".buttonsAtoF");
                 }
                 
                 
- if(button.target.value !="_"){ 
+ if(button.currentTarget.value !="_"){ 
      
-    binaryInput.value += button.target.value;
+    binaryInput.value += button.currentTarget.value;
          
  }else{
      binaryInput.value=binaryInput.value.slice(0,binaryInput.value.length -1) ;
@@ -2787,10 +2787,10 @@ function back_slice( x,str){
     buttons1to9.forEach((butt, index) => {
         butt.addEventListener("click", (button) => {
             navigator.vibrate(50);
-            if (button.target.value != "12") {
-                binaryInput.value += button.target.value;
+            if (button.currentTarget.value != "12") {
+                binaryInput.value += button.currentTarget.value;
             }
-            if (button.target.value === "12") {
+            if (button.currentTarget.value === "12") {
                 binaryInput.value = binaryInput.value.slice(0, binaryInput.value.length - 1);
             }
         });
